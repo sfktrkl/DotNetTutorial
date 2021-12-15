@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Tutorial.Repository;
+using Tutorial.Models;
 
 namespace Tutorial.Controllers
 {
@@ -12,6 +15,12 @@ namespace Tutorial.Controllers
     // methods for home page, about page, contacts etc.
     public class BookController : Controller
     {
+        private readonly BookRepository _bookRepository = null;
+        public BookController()
+        {
+            _bookRepository = new BookRepository();
+        }
+
         // All public methods of a controller class are known as Action method.
         // They are created for a specific action in the application.
         // An action method can return several types.
@@ -28,6 +37,10 @@ namespace Tutorial.Controllers
         {
             return "All books";
         }
+        public List<BookModel> GetAllBooksFromRepository()
+        {
+            return _bookRepository.GetAllBooks();
+        }
 
         // How to use the parameters.
         // http:domain.com/book/getBook/1
@@ -35,12 +48,20 @@ namespace Tutorial.Controllers
         {
             return $"Book {id}";
         }
+        public BookModel GetBookFromRepository(int id)
+        {
+            return _bookRepository.GetBookById(id);
+        }
 
         // How to use multiple parameters.
         // http:domain.com/book/searchBooks?bookName=book&authorName=god
         public string SearchBooks(string bookName, string authorName)
         {
             return $"Book name {bookName} & Author name {authorName}";
+        }
+        public List<BookModel> SearchBooksInRepository(string title, string authorName)
+        {
+            return _bookRepository.SearchBook(title, authorName);
         }
     }
 }
