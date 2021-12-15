@@ -37,9 +37,10 @@ namespace Tutorial.Controllers
         {
             return "All books";
         }
-        public List<BookModel> GetAllBooksFromRepository()
+        public ViewResult GetAllBooksFromRepository()
         {
-            return _bookRepository.GetAllBooks();
+            var data = _bookRepository.GetAllBooks();
+            return View();
         }
 
         // How to use the parameters.

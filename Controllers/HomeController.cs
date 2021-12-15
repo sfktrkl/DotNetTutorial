@@ -5,9 +5,16 @@ namespace Tutorial.Controllers
     public class HomeController : Controller
     {
         // The index action method
-        public string Index()
+        public ViewResult Index()
         {
-            return "Hello from controller.";
+            // If name of the view is same with the action method
+            // just call the view, otherwise pass the view name.
+            return View();
+        }
+
+        public ViewResult AboutUs()
+        {
+            return View();
         }
     }
 }
