@@ -45,3 +45,23 @@ else
     default: <h2>Default from switch</h2>
         break;
 }
+
+@for(int i = 0; i < 3; i++)
+{
+    <h2>For loop, value @i</h2>
+}
+
+@{ 
+    var list = new List<int>() { 1, 2, 3 };
+}
+
+@foreach(var value in list)
+{
+    <h2>For each loop, value @value</h2>
+}
+
+@*{
+    // Commented out
+}*@
+
+
