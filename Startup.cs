@@ -11,7 +11,18 @@ namespace Tutorial
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // To add MVC to our application.
+            // services.AddMvc();
 
+            // In version 3.1
+
+            // To add controllers
+            // services.AddControllers();
+
+            // To add controllers and views
+            // We are currently planing to use controllers
+            // and views for this application.
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,10 +37,8 @@ namespace Tutorial
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello");
-                });
+                // Routing to HomeController class
+                endpoints.MapDefaultControllerRoute();
             });
         }
 
