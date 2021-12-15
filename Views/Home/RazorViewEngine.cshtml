@@ -17,3 +17,31 @@
 <h2>Escape sequence - @@account</h2>
 <h2>When do not match with C#  - smth@smth.com</h2>
 
+@{ 
+    int a = 10;
+    int b = 10;
+}
+
+@if(a > 5)
+{
+    a++;
+    <h2>From an if block. Value: @a</h2>
+}
+else if (b == 10)
+{
+    <h2>From an if else block.</h2>
+}
+else
+{
+    <h2>From an else block.</h2>
+}
+
+<h2>Ternary - @(a==10 ? a : b)</h2>
+
+@switch(a)
+{
+    case 11: <h2>From switch, value is 11.</h2>
+        break;
+    default: <h2>Default from switch</h2>
+        break;
+}
