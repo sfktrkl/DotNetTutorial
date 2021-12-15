@@ -33,5 +33,18 @@ namespace Tutorial.Controllers
             return View();
         }
 
+        public ViewResult RazorViewEngine()
+        {
+            // View engine is a piece of code which is used to render
+            // server side code into the view.
+            // View engines is used to set/get the default path location
+            // for views, shared folders etc.
+            // Razor view engine is used to write C# logics on the views.
+            // In Razor view engine, everything starts with @,
+            // It is possible writing single line and multi line syntax.
+
+            return View();
+        }
+
     }
 }

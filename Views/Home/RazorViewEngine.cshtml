@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "RazorViewEngine";
+}
+
+<h1>Razor View Engine</h1>
+
+<h2>Single line - @DateTime.Now.Date</h2>
+
+@{ 
+    var now = DateTime.Now;
+    var date = now.Date;
+}
+
+<h2>Multi line - @date</h2>
+
+<h2>Escape sequence - @@account</h2>
+<h2>When do not match with C#  - smth@smth.com</h2>
+
