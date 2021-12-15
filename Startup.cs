@@ -16,8 +16,11 @@ namespace Tutorial
 
             // In version 3.1
 
-            // To add controllers
+            // To add controllers only, for a Web API
             // services.AddControllers();
+
+            // To add views only, for a Razor pages
+            // services.AddRazorPages();
 
             // To add controllers and views
             // We are currently planing to use controllers
