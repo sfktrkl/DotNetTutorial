@@ -1,7 +1,9 @@
+using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Tutorial
@@ -35,6 +37,15 @@ namespace Tutorial
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Use this middleware to be able to use any static files.
+            app.UseStaticFiles();
+
+            // If static files are located in other location than wwwroot.
+            app.UseStaticFiles(new StaticFileOptions() {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
+                RequestPath = "/MyStaticFiles"
+            });
 
             app.UseRouting();
 
