@@ -13,23 +13,20 @@
     // They are also grouped based on their features.
 
     ViewData["Title"] = "Home";
+    Layout = "_Layout";
 
     // All static files are placed inside wwwroot folder.
     // This folder also known as Content Root folder and 
     // must be places at the root level.
 }
 
-<link href="~/css/Site.css" rel="stylesheet" />
 <img src="~/images/logo.png" alt="logo" class="logo"/>
 <img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo"/>
 
 <h1>Welcome to the tutorial.</h1>
 <p>This is the home page of our tutorial.</p>
 
-<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
 <input type="button" id="btn" value="Click Me!" class="btn btn-danger"/>
-
-<script src="~/lib/jquery/jquery.js"></script>
 <script>
     $(document).ready(() => {
         $("#btn").prop("value", "Button text with jquery.");

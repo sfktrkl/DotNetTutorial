@@ -1,0 +1,25 @@
+﻿@{ 
+    // Layout is a .cshtml file that is used to provide
+    // common structure to other views.
+    // RenderBody method is used inside layout file
+    // to provide space for other view.
+    // Only one RenderBody method can be used in one layout.
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tutorial</title>
+
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/Site.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.js"></script>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>
