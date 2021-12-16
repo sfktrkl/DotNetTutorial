@@ -16,19 +16,29 @@
     Layout = "_Layout";
 
     // All static files are placed inside wwwroot folder.
-    // This folder also known as Content Root folder and 
+    // This folder also known as Content Root folder and
     // must be places at the root level.
 }
 
-<img src="~/images/logo.png" alt="logo" class="logo"/>
-<img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo"/>
+<img src="~/images/logo.png" alt="logo" class="logo" />
+<img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo" />
 
 <h1>Welcome to the tutorial.</h1>
 <p>This is the home page of our tutorial.</p>
 
-<input type="button" id="btn" value="Click Me!" class="btn btn-danger"/>
-<script>
-    $(document).ready(() => {
-        $("#btn").prop("value", "Button text with jquery.");
-    });
-</script>
+<input type="button" id="btn" value="Click Me!" class="btn btn-danger" />
+
+@{
+    // Section is used on Views.
+    // To create a section use @section directive.
+    // Each section has a unique name and whatever
+    // we will write inside this section block that
+    // will replace the RenderSection with same name.
+}
+@section scripts{
+    <script>
+        $(document).ready(() => {
+            $("#btn").prop("value", "Button text with jquery.");
+        });
+    </script>
+}
