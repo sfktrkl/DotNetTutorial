@@ -40,7 +40,7 @@ namespace Tutorial.Controllers
         public ViewResult GetAllBooksFromRepository()
         {
             var data = _bookRepository.GetAllBooks();
-            return View();
+            return View(data);
         }
 
         // How to use the parameters.
