@@ -49,9 +49,10 @@ namespace Tutorial.Controllers
         {
             return $"Book {id}";
         }
-        public BookModel GetBookFromRepository(int id)
+        public ViewResult GetBookFromRepository(int id)
         {
-            return _bookRepository.GetBookById(id);
+            var data = _bookRepository.GetBookById(id);
+            return View(data);
         }
 
         // How to use multiple parameters.
