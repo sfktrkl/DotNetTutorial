@@ -12,6 +12,11 @@ namespace Tutorial.Controllers
             return View();
         }
 
+        public ViewResult Welcome()
+        {
+            return View();
+        }
+
         public ViewResult AboutUs()
         {
             return View();
