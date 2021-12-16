@@ -28,6 +28,17 @@ namespace Tutorial
             // We are currently planing to use controllers
             // and views for this application.
             services.AddControllersWithViews();
+
+            // By default Razor file (.cshtml) compiled at two times.
+            // Build and Publish.
+            // This causes changes to not reflected to the view directly.
+            // To fix this problem enable the run time compilation.
+            // Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
+            // Make changes in the startup file, add it conditionally,
+            // so that it won't affect the performance.
+#if DEBUG
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
