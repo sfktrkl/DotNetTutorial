@@ -25,3 +25,13 @@
 
 <h1>Welcome to the tutorial.</h1>
 <p>This is the home page of our tutorial.</p>
+
+<link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+<input type="button" id="btn" value="Click Me!" class="btn btn-danger"/>
+
+<script src="~/lib/jquery/jquery.js"></script>
+<script>
+    $(document).ready(() => {
+        $("#btn").prop("value", "Button text with jquery.");
+    });
+</script>
