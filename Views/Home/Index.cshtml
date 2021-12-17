@@ -19,6 +19,9 @@
     // It can also be used to pass data from view to layout.
     var book = ViewData["book"] as BookModel;
 
+    // This data is defined to view with ViewData Attribute.
+    var customBook = ViewData["CustomBook"] as BookModel;
+
     // All static files are placed inside wwwroot folder.
     // This folder also known as Content Root folder and
     // must be places at the root level.
@@ -57,3 +60,11 @@ BookModel: @ViewBag.Type.Id @ViewBag.Type.Author
 Name: @ViewData["name"]
 <br />
 Book: @book.Id @book.Author
+
+<br />
+CustomProperty: @ViewData["CustomProperty"]
+<br />
+CustomTitle: @ViewData["CustomTitle"]
+<br />
+CustomBook: @customBook.Id @customBook.Author 
+

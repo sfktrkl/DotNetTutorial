@@ -6,6 +6,16 @@ namespace Tutorial.Controllers
 {
     public class HomeController : Controller
     {
+        // This property will be created as ViewData.
+        [ViewData]
+        public string CustomProperty { get; set; }
+
+        [ViewData]
+        public string CustomTitle { get; set; }
+
+        [ViewData]
+        public BookModel CustomBook { get; set; }
+
         // The index action method
         public ViewResult Index()
         {
@@ -32,6 +42,12 @@ namespace Tutorial.Controllers
             // It doesn't work with dynamic types, it uses key value pairs.
             ViewData["name"] = "Selman";
             ViewData["book"] = new BookModel() { Id=8, Author="Necati" };
+
+            // ViewData Attribute is very similar to ViewData
+            // except how they are used.
+            CustomProperty = "Custom value";
+            CustomTitle = "Welcome to the tutorial";
+            CustomBook = new BookModel() { Id=9, Author="Hazal" };
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
