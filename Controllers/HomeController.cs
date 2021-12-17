@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Tutorial.Models;
+using System.Dynamic;
 
 namespace Tutorial.Controllers
 {
@@ -7,6 +9,23 @@ namespace Tutorial.Controllers
         // The index action method
         public ViewResult Index()
         {
+            // ViewBag is used to pass data from action method
+            // to view and we can display this data on view.
+            // This type of data binding is known as loosely binding.
+            // It is possible passing any type of data in ViewBag.
+            // To sent multiple data on a view ViewBag is the easiest
+            // solution but since it works on a dynamic type it will
+            // not give any compile time error.
+            ViewBag.Title = 123;
+            // It is possible assigning an anonymous data.
+            dynamic data = new ExpandoObject();
+            data.Id = 1;
+            data.Name = "Nitish";
+            ViewBag.Data = data;
+
+            // It is possible assigning an object.
+            ViewBag.Type = new BookModel() { Id=7, Author="Safak" };
+
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
             return View();
