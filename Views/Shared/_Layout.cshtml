@@ -11,8 +11,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Tutorial</title>
-
+    <title>@ViewData["Title"] | Tutorial</title>
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
     <link href="~/css/Site.css" rel="stylesheet" />
 </head>
@@ -47,6 +46,7 @@
     </header>
 
     <main role="main">
+        <h1 class="text-center">@ViewData["Title"]</h1>
         @RenderBody()
     </main>
 

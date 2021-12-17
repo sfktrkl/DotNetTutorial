@@ -14,6 +14,11 @@
 
     ViewData["Title"] = "Home";
 
+    // ViewData works with ViewDataDictionary type. Hence, while
+    // sending an object is should be casted to data type.
+    // It can also be used to pass data from view to layout.
+    var book = ViewData["book"] as BookModel;
+
     // All static files are placed inside wwwroot folder.
     // This folder also known as Content Root folder and
     // must be places at the root level.
@@ -22,7 +27,6 @@
 <img src="~/images/logo.png" alt="logo" class="logo" />
 <img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo" />
 
-<h1>Welcome to the tutorial.</h1>
 <p>This is the home page of our tutorial.</p>
 
 <input type="button" id="btn" value="Click Me!" class="btn btn-danger" />
@@ -48,3 +52,8 @@ Title: @ViewBag.Title
 Id, Name: @ViewBag.Data.Id @ViewBag.Data.Name
 <br />
 BookModel: @ViewBag.Type.Id @ViewBag.Type.Author
+
+<br />
+Name: @ViewData["name"]
+<br />
+Book: @book.Id @book.Author

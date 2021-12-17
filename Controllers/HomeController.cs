@@ -26,6 +26,13 @@ namespace Tutorial.Controllers
             // It is possible assigning an object.
             ViewBag.Type = new BookModel() { Id=7, Author="Safak" };
 
+            // ViewData is used to pass data from an action
+            // method to a view and can be displayed in view.
+            // This type of data binding is known as loosely binding.
+            // It doesn't work with dynamic types, it uses key value pairs.
+            ViewData["name"] = "Selman";
+            ViewData["book"] = new BookModel() { Id=8, Author="Necati" };
+
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
             return View();
