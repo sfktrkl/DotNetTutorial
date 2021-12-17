@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Tutorial.Repository;
 using Tutorial.Models;
+using System.Dynamic;
 
 namespace Tutorial.Controllers
 {
@@ -39,7 +40,16 @@ namespace Tutorial.Controllers
         }
         public ViewResult GetAllBooksFromRepository()
         {
-            var data = _bookRepository.GetAllBooks();
+            // If we do not declare @model directive on Views
+            // and have a model instance passed to them then
+            // we can get the model instance data dynamically
+            // on these views and they are called Dynamic views.
+            // In these views action method's logic can easily be changed.
+            // Also, anonymous data can be passed easily.
+            // But it will not be possible getting a compile time error.
+            // Hence, it is generally avoided at all.
+            dynamic data = new ExpandoObject();
+            data.books = _bookRepository.GetAllBooks();
             return View(data);
         }
 
