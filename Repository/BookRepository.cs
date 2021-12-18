@@ -62,9 +62,24 @@ namespace Tutorial.Repository
             return books;
         }
 
-        public BookModel GetBookById(int id)
+        public async Task<BookModel> GetBookById(int id)
         {
-            return DataSource().Where(x => x.Id == id).FirstOrDefault();
+            // Get the book from the database.
+            var book = await _context.Books.FindAsync(id);
+            if (book != null)
+            {
+                return new BookModel()
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Description = book.Description,
+                    Language = book.Language,
+                    Category = book.Category,
+                    TotalPages = book.TotalPages
+                };
+            }
+            return null;
         }
 
         public List<BookModel> SearchBook(string title, string authorName)

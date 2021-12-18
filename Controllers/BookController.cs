@@ -63,9 +63,9 @@ namespace Tutorial.Controllers
             return $"Book {id}";
         }
         [Route("book-details/{id}", Name = "bookDetails")]
-        public ViewResult GetBookFromRepository(int id)
+        public async Task<ViewResult> GetBookFromRepository(int id)
         {
-            var data = _bookRepository.GetBookById(id);
+            var data = await _bookRepository.GetBookById(id);
             return View(data);
         }
 
