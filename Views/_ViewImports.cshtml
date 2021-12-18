@@ -18,3 +18,13 @@
 
     @using Tutorial.Models;
 }
+
+@{ 
+    // Tag helpers are used to render server side code
+    // on a Razor file to create and render HTML elements.
+    // It is possible creating form, image and link tags.
+    // First set the scope for Tag helpers.
+    // Then use @addTagHelper and @removeTagHelper directives.
+    // It can be used in a single view or in _ViewImports.
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+}
