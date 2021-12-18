@@ -25,12 +25,28 @@
     // All static files are placed inside wwwroot folder.
     // This folder also known as Content Root folder and
     // must be places at the root level.
+
+    // Environment tag helper is used to render some
+    // content based on current environment such as,
+    // Development, Staging, Production or any custom.
+    // Environment tag attributes: names, include, exclude
 }
 
 <img src="~/images/logo.png" alt="logo" class="logo" />
 <img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo" />
 
-<p>This is the home page of our tutorial.</p>
+<environment names="Development">
+    <p>This is the home page of our tutorial. (Development)</p>
+</environment>
+<environment names="Development, Production, Staging">
+    <p>This is the home page of our tutorial. (All)</p>
+</environment>
+<environment include="Development, Production">
+    <p>Show in Development and Production.</p>
+</environment>
+<environment exclude="Production">
+    <p>Do not show in Production.</p>
+</environment>
 
 <input type="button" id="btn" value="Click Me!" class="btn btn-danger" />
 
