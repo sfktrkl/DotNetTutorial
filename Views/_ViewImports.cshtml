@@ -27,4 +27,22 @@
     // Then use @addTagHelper and @removeTagHelper directives.
     // It can be used in a single view or in _ViewImports.
     @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+    // Anchor tag helper is used to create link <a></a>.
+    // By default all tag helpers attributes are
+    // prefixed with asp-
+    // The main feaute of using a link to navigate
+    // It has attributes, asp-controller, asp-action, asp-area
+    // It is possible to pass a parameter or multiple parameters.
+    // asp-route-{paramname}
+    // With a dictionary it can also be possible lots of data
+    // asp-all-route-data
+    // Also, fragments can be passed using anchor tags.
+    // asp-fragment
+    // It is also possible passing complete url
+    // asp-protocol, asp-host
+    // It is also compatible with the routing, instead of
+    // asp-controller and asp-action it can be used.
+    // asp-route
+
 }

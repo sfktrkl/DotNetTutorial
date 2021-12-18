@@ -25,19 +25,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/welcome">Welcome</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Welcome</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/razorviewengine">Razor</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="RazorViewEngine">Razor</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/book/getallbooksfromrepository">Books</a>
+                            <a class="nav-link text-dark" asp-controller="Book" asp-action="GetAllBooksFromRepository">Books</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/aboutus">About</a>
+                            <a class="nav-link text-dark" asp-protocol="https" asp-host="game-pit.web.app" asp-controller="Morz" asp-action="morse">Morse</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/contactus">Contact</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="AboutUs">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact</a>
                         </li>
                     </ul>
                 </div>

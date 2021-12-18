@@ -59,6 +59,7 @@ namespace Tutorial.Controllers
         {
             return $"Book {id}";
         }
+        [Route("book-details/{id}", Name = "bookDetails")]
         public ViewResult GetBookFromRepository(int id)
         {
             var data = _bookRepository.GetBookById(id);

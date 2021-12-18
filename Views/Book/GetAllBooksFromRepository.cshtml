@@ -1,9 +1,19 @@
 ﻿@{
     ViewData["Title"] = "All books";
+
+    var booksCount = Model.books.Count;
+    var randomNumber = new Random().Next(1, booksCount + 1);
+    var parameters = new Dictionary<string, string>();
+    parameters.Add("id", randomNumber.ToString());
 }
 
 <div class="container">
     <div class="row">
+        <div class="btn-group">
+            <a asp-controller="book" asp-action="GetBookFromRepository"
+               asp-all-route-data="@parameters"
+               class="btn btn-sm btn-outline-secondary">Random Book</a>
+        </div>
         @foreach (var book in Model.books)
         {
             <div class="col-md-4">
@@ -14,7 +24,13 @@
                         <p class="card-text">@book.Description</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/book/getbookfromrepository/@book.Id" class="btn btn-sm btn-outline-secondary">View details</a>
+                                <a asp-controller="book" asp-action="GetBookFromRepository"
+                                   asp-route-id="@book.Id" asp-fragment="book"
+                                   class="btn btn-sm btn-outline-secondary">View details</a>
+                            </div>
+                            <div class="btn-group">
+                                <a asp-route="bookDetails" asp-route-id="@book.Id"
+                                   class="btn btn-sm btn-outline-secondary">View details</a>
                             </div>
                             <small class="text-muted">@book.Author</small>
                         </div>
