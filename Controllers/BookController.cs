@@ -76,5 +76,28 @@ namespace Tutorial.Controllers
         {
             return _bookRepository.SearchBook(title, authorName);
         }
+
+        public ViewResult AddNewBook()
+        {
+            // Form is used to get data from user.
+            // A form has various input options for user,
+            // Text box, text area, radio button, checkbox etc.
+            // Its components:
+            // form tag, input elements, method
+            // submit url, submit button
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult AddNewBook(BookModel bookModel)
+        {
+            // To handle the post request coming from
+            // the form, this action method is needed.
+            // It is not needed to set a new action to
+            // form element since the action method
+            // name has the same view.
+            // If contoller is different use asp-action
+            return View();
+        }
     }
 }
