@@ -1,11 +1,40 @@
 ﻿using System.Collections.Generic;
 using Tutorial.Models;
+using Tutorial.Data;
 using System.Linq;
+using System;
 
 namespace Tutorial.Repository
 {
     public class BookRepository
     {
+        private readonly BookStoreContext _context = null;
+
+        public BookRepository(BookStoreContext context)
+        {
+            // If dependency injections are used this
+            // dependency will be resolved automatically
+            // during Startup.ConfigureServices.
+            _context = context;
+        }
+
+        public int AddNewBook(BookModel model)
+        {
+            var book = new Books()
+            {
+                Title = model.Title,
+                Author = model.Author,
+                Description = model.Description,
+                CreatedOn = DateTime.UtcNow,
+                UpdatedOn = DateTime.UtcNow
+            };
+            _context.Books.Add(book);
+            _context.SaveChanges();
+            // Id will be automatically written to the
+            // newly created object (identity specification).
+            return book.Id;
+        }
+
         public List<BookModel> GetAllBooks()
         {
             return DataSource();

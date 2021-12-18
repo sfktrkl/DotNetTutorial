@@ -1,5 +1,6 @@
 using System.IO;
 using Tutorial.Data;
+using Tutorial.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,9 @@ namespace Tutorial
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
+
+            // To be able to use the BookRepository dependency.
+            services.AddScoped<BookRepository, BookRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

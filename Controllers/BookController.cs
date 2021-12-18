@@ -17,9 +17,11 @@ namespace Tutorial.Controllers
     public class BookController : Controller
     {
         private readonly BookRepository _bookRepository = null;
-        public BookController()
+        public BookController(BookRepository bookRepository)
         {
-            _bookRepository = new BookRepository();
+            // Use dependency injection to resolve dependency.
+            // It is assigned in Startup.ConfigureServices.
+            _bookRepository = bookRepository;
         }
 
         // All public methods of a controller class are known as Action method.
@@ -77,7 +79,7 @@ namespace Tutorial.Controllers
             return _bookRepository.SearchBook(title, authorName);
         }
 
-        public ViewResult AddNewBook()
+        public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
             // Form is used to get data from user.
             // A form has various input options for user,
@@ -85,11 +87,13 @@ namespace Tutorial.Controllers
             // Its components:
             // form tag, input elements, method
             // submit url, submit button
+            ViewBag.IsSuccess = isSuccess;
+            ViewBag.BookId = bookId;
             return View();
         }
 
         [HttpPost]
-        public ViewResult AddNewBook(BookModel bookModel)
+        public IActionResult AddNewBook(BookModel bookModel)
         {
             // To handle the post request coming from
             // the form, this action method is needed.
@@ -97,6 +101,19 @@ namespace Tutorial.Controllers
             // form element since the action method
             // name has the same view.
             // If contoller is different use asp-action
+            int id = _bookRepository.AddNewBook(bookModel);
+            // When the form is submitted and view is returned
+            // the last request will be the post request. Hence,
+            // when page is refreshed it will be redo the same
+            // request. Hence, instead of returning the view
+            // return a new form with RedirectToAction.
+            // Also, use a return type as IActionResult
+            // so that action method can return any type.
+            if (id > 0)
+                // Set isSuccess parameter so that the alert can be seen
+                // when the post request is succeeded.
+                // Also set the bookId so the details can be seen.
+                return RedirectToAction(nameof(AddNewBook), new { isSuccess = true, bookId = id });
             return View();
         }
     }
