@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Tutorial.Models;
 using Tutorial.Data;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Tutorial.Repository
             _context = context;
         }
 
-        public int AddNewBook(BookModel model)
+        public async Task<int> AddNewBook(BookModel model)
         {
             var book = new Books()
             {
@@ -28,8 +29,11 @@ namespace Tutorial.Repository
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            // Using asynchronous calls are important to
+            // make application robust and fast. Since, we
+            // are working with the databases.
+            await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
             // Id will be automatically written to the
             // newly created object (identity specification).
             return book.Id;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Tutorial.Repository;
 using Tutorial.Models;
 using System.Dynamic;
@@ -93,7 +94,7 @@ namespace Tutorial.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewBook(BookModel bookModel)
+        public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
             // To handle the post request coming from
             // the form, this action method is needed.
@@ -101,7 +102,7 @@ namespace Tutorial.Controllers
             // form element since the action method
             // name has the same view.
             // If contoller is different use asp-action
-            int id = _bookRepository.AddNewBook(bookModel);
+            int id = await _bookRepository.AddNewBook(bookModel);
             // When the form is submitted and view is returned
             // the last request will be the post request. Hence,
             // when page is refreshed it will be redo the same
