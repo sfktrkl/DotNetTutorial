@@ -17,7 +17,22 @@
         <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
-        <link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <!--
+            It is possible getting the file from nearest server with cdn.
+            Also, already downloaded (another source) file can be used.
+            If file cannot be reached from server, asp-fallback-href.
+            Test a class, asp-fallback-test-class
+            Its property, asp-fallback-test-property
+            With a value, asp-fallback-test-value
+        -->
+        <link rel="stylesheet"
+              href="http://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/twitter-bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only"
+              asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute"
+              integrity=""
+              crossorigin="anonymous">
     </environment>
     <link href="~/css/Site.css" rel="stylesheet" />
 </head>
