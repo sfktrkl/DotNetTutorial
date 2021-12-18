@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tutorial.Models;
 using Tutorial.Data;
@@ -39,9 +40,26 @@ namespace Tutorial.Repository
             return book.Id;
         }
 
-        public List<BookModel> GetAllBooks()
+        public async Task<List<BookModel>> GetAllBooks()
         {
-            return DataSource();
+            // Get the books from the database and use an
+            // async call to do this.
+            var data = await _context.Books.ToListAsync();
+            var books = new List<BookModel>();
+            if (data?.Any() == true)
+            {
+                foreach (var book in data)
+                    books.Add(new BookModel() { 
+                        Id = book.Id,
+                        Title = book.Title,
+                        Author = book.Author,
+                        Description = book.Description,
+                        Language = book.Language,
+                        Category = book.Category,
+                        TotalPages = book.TotalPages
+                    });
+            }
+            return books;
         }
 
         public BookModel GetBookById(int id)

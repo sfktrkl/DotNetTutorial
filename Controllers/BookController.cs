@@ -41,7 +41,7 @@ namespace Tutorial.Controllers
         {
             return "All books";
         }
-        public ViewResult GetAllBooksFromRepository()
+        public async Task<ViewResult> GetAllBooksFromRepository()
         {
             // If we do not declare @model directive on Views
             // and have a model instance passed to them then
@@ -52,7 +52,7 @@ namespace Tutorial.Controllers
             // But it will not be possible getting a compile time error.
             // Hence, it is generally avoided at all.
             dynamic data = new ExpandoObject();
-            data.books = _bookRepository.GetAllBooks();
+            data.books = await _bookRepository.GetAllBooks();
             return View(data);
         }
 
