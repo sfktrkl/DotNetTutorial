@@ -1,4 +1,5 @@
 using System.IO;
+using Tutorial.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,11 @@ namespace Tutorial
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // To tell the application to use the BookStoreContext.
+            // Same connection stream can also be passed from here.
+            // Then the OnConfiguring method is not needed.
+            services.AddDbContext<BookStoreContext>();
+
             // To add MVC to our application.
             // services.AddMvc();
 
