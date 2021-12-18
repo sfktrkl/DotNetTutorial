@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Tutorial.Data
 {
     // To make the logic separated instead of using model
@@ -13,5 +14,15 @@ namespace Tutorial.Data
         public string Category { get; set; }
         public string Language { get; set; }
         public int TotalPages { get; set; }
+
+        // From package manager console,
+        // Use Add-Migration command to create a table.
+        // Created class contains two methods,
+        // Up method is used to put data.
+        // Down method is used to remove data.
+        // Then update the database.
+        // Update-Database
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
     }
 }
