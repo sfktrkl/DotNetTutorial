@@ -96,6 +96,13 @@ namespace Tutorial.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
+            // Check the input of the user.
+            if (!ModelState.IsValid)
+            {
+                ViewBag.IsSuccess = false;
+                ViewBag.BookId = 0;
+                return View();
+            }
             // To handle the post request coming from
             // the form, this action method is needed.
             // It is not needed to set a new action to
