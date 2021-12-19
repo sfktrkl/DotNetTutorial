@@ -28,6 +28,8 @@ namespace Tutorial.Repository
                 Author = model.Author,
                 Description = model.Description,
                 TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
+                Category = model.Category,
+                Language = model.Language,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };

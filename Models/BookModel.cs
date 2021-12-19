@@ -31,8 +31,15 @@ namespace Tutorial.Models
         [StringLength(500, MinimumLength = 10)]
         public string Description { get; set; }
 
+        // DataType attribute doesn't used to validate the
+        // field, but to generate a field on the form.
+        [DataType(DataType.Text)]
+        [Display(Name = "Book Category")]
         public string Category { get; set; }
+
+        [DataType(DataType.Text)]
         public string Language { get; set; }
+
         [Required(ErrorMessage = "Please enter the number of pages.")]
         [Display(Name = "Total pages of the book")]
         public int? TotalPages { get; set; }
