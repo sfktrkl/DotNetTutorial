@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using Tutorial.Enums;
 
 namespace Tutorial.Models
 {
@@ -45,6 +46,8 @@ namespace Tutorial.Models
         public string Keyword { get; set; }
 
         public List<string> Keywords { get; set; }
+
+        public TypeEnum Type { get; set; }
 
         [Required(ErrorMessage = "Please enter the number of pages.")]
         [Display(Name = "Total pages of the book")]
