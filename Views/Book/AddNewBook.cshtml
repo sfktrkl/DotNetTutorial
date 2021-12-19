@@ -44,7 +44,13 @@
 
         <div class="form-group">
             <label asp-for="Language"></label>
-            <input asp-for="Language" class="form-control" />
+            <select asp-for="Language" class="form-control" required>
+                <option value="">Choose the language</option>
+                <option selected>English</option>
+                <option>Turkish</option>
+                <option>German</option>
+                <option>Hindi</option>
+            </select>
             <span asp-validation-for="Language" class="text-danger"></span>
         </div>
 

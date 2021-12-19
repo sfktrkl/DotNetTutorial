@@ -90,7 +90,11 @@ namespace Tutorial.Controllers
             // submit url, submit button
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
-            return View();
+
+            // To set some default values to the form.
+            var book = new BookModel();
+            book.Description = "Some description";
+            return View(book);
         }
 
         [HttpPost]
