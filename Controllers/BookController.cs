@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tutorial.Repository;
@@ -79,6 +80,12 @@ namespace Tutorial.Controllers
         {
             return _bookRepository.SearchBook(title, authorName);
         }
+        private List<string> GetCategories()
+        {
+            return new List<string>() { 
+                "Horror", "Education", "Fantasy" 
+            };
+        }
 
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
@@ -94,6 +101,13 @@ namespace Tutorial.Controllers
             // To set some default values to the form.
             var book = new BookModel();
             book.Description = "Some description";
+
+            // Create the select list which will be used
+            // for the category dropdown.
+            // Instead of creating the select list here
+            // it can also be set in the view.
+            ViewBag.Category = new SelectList(GetCategories(), "Education"); 
+
             return View(book);
         }
 
@@ -113,6 +127,7 @@ namespace Tutorial.Controllers
                 // ModelOnly - Only the model validation messages
                 // None - No message will be shown
                 ModelState.AddModelError("", "This is a model validation message.");
+                ViewBag.Category = new SelectList(GetCategories(), "Education"); 
                 return View();
             }
             // To handle the post request coming from
