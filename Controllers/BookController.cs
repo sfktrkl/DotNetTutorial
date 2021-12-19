@@ -101,6 +101,14 @@ namespace Tutorial.Controllers
             {
                 ViewBag.IsSuccess = false;
                 ViewBag.BookId = 0;
+
+                // Validation summary tag helper is used to
+                // display a summary of validation messages.
+                // To display validation summary, asp-validation-summary
+                // All - Property and model validation messages
+                // ModelOnly - Only the model validation messages
+                // None - No message will be shown
+                ModelState.AddModelError("", "This is a model validation message.");
                 return View();
             }
             // To handle the post request coming from
