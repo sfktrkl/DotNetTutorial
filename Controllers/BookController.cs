@@ -145,7 +145,14 @@ namespace Tutorial.Controllers
                 // ModelOnly - Only the model validation messages
                 // None - No message will be shown
                 ModelState.AddModelError("", "This is a model validation message.");
-                ViewBag.Category = new SelectList(GetCategories(), "Education"); 
+                // SelectListItems can be grouped using SelectListGroup.
+                var general = new SelectListGroup() { Name = "General" };
+                var education = new SelectListGroup() { Name = "Education", Disabled = true };
+                ViewBag.Category = GetCategories().Select(x => new SelectListItem()
+                {
+                    Text = x,
+                    Group = x == "Education" ? education : general
+                });
                 // It is also possible using SelectListItem to create the same dropdown.
                 ViewBag.Keyword = GetKeywords().Select(x => new SelectListItem()
                 {
