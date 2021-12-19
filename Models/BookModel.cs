@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace Tutorial.Models
 {
@@ -42,6 +43,8 @@ namespace Tutorial.Models
 
         [DataType(DataType.Text)]
         public string Keyword { get; set; }
+
+        public List<string> Keywords { get; set; }
 
         [Required(ErrorMessage = "Please enter the number of pages.")]
         [Display(Name = "Total pages of the book")]
