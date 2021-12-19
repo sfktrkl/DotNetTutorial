@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Tutorial.Repository;
 using Tutorial.Models;
 using System.Dynamic;
+using System.Linq;
 
 namespace Tutorial.Controllers
 {
@@ -145,7 +146,20 @@ namespace Tutorial.Controllers
                 // None - No message will be shown
                 ModelState.AddModelError("", "This is a model validation message.");
                 ViewBag.Category = new SelectList(GetCategories(), "Education"); 
-                ViewBag.Keyword = new SelectList(GetKeywords(), "Id", "Keyword");
+                // It is also possible using SelectListItem to create the same dropdown.
+                ViewBag.Keyword = GetKeywords().Select(x => new SelectListItem()
+                {
+                    Text = x.Keyword,
+                    Value = x.Id.ToString()
+                }).ToList();
+                // SelectListItem also has some additional properties.
+                ViewBag.Keyword.Add(new SelectListItem()
+                {
+                    Text="Disabled",
+                    Value=(ViewBag.Keyword.Count + 1).ToString(),
+                    Disabled=true,
+                    Selected=false
+                });
                 return View();
             }
             // To handle the post request coming from
