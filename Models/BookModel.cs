@@ -40,6 +40,9 @@ namespace Tutorial.Models
         [DataType(DataType.Text)]
         public string Language { get; set; }
 
+        [DataType(DataType.Text)]
+        public string Keyword { get; set; }
+
         [Required(ErrorMessage = "Please enter the number of pages.")]
         [Display(Name = "Total pages of the book")]
         public int? TotalPages { get; set; }

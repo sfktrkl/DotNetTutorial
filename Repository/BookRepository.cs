@@ -30,6 +30,7 @@ namespace Tutorial.Repository
                 TotalPages = model.TotalPages.HasValue ? model.TotalPages.Value : 0,
                 Category = model.Category,
                 Language = model.Language,
+                Keyword = model.Keyword,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };
@@ -57,8 +58,9 @@ namespace Tutorial.Repository
                         Title = book.Title,
                         Author = book.Author,
                         Description = book.Description,
-                        Language = book.Language,
                         Category = book.Category,
+                        Language = book.Language,
+                        Keyword = book.Keyword,
                         TotalPages = book.TotalPages
                     });
             }
@@ -77,8 +79,9 @@ namespace Tutorial.Repository
                     Title = book.Title,
                     Author = book.Author,
                     Description = book.Description,
-                    Language = book.Language,
                     Category = book.Category,
+                    Language = book.Language,
+                    Keyword = book.Keyword,
                     TotalPages = book.TotalPages
                 };
             }

@@ -13,6 +13,7 @@ namespace Tutorial.Data
         public string Description { get; set; }
         public string Category { get; set; }
         public string Language { get; set; }
+        public string Keyword { get; set; }
         public int TotalPages { get; set; }
 
         // From package manager console,

@@ -87,6 +87,17 @@ namespace Tutorial.Controllers
             };
         }
 
+        private List<KeywordModel> GetKeywords()
+        {
+            return new List<KeywordModel>()
+            {
+                new KeywordModel(){ Id=1, Keyword="Education" },
+                new KeywordModel(){ Id=2, Keyword="Research" },
+                new KeywordModel(){ Id=3, Keyword="Technology" },
+                new KeywordModel(){ Id=4, Keyword="Science" }
+            };
+        }
+
         public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
         {
             // Form is used to get data from user.
@@ -106,7 +117,13 @@ namespace Tutorial.Controllers
             // for the category dropdown.
             // Instead of creating the select list here
             // it can also be set in the view.
-            ViewBag.Category = new SelectList(GetCategories(), "Education"); 
+            ViewBag.Category = new SelectList(GetCategories(), "Education");
+
+            // To be able to use the text and the value together
+            // use this overload of the select list.
+            // It is also possible passing the default with model.
+            ViewBag.Keyword = new SelectList(GetKeywords(), "Id", "Keyword");
+            book.Keyword = "1";
 
             return View(book);
         }
@@ -128,6 +145,7 @@ namespace Tutorial.Controllers
                 // None - No message will be shown
                 ModelState.AddModelError("", "This is a model validation message.");
                 ViewBag.Category = new SelectList(GetCategories(), "Education"); 
+                ViewBag.Keyword = new SelectList(GetKeywords(), "Id", "Keyword");
                 return View();
             }
             // To handle the post request coming from
