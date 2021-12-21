@@ -49,6 +49,10 @@ namespace Tutorial.Models
 
         public TypeEnum Type { get; set; }
 
+        [Display(Name = "Book Extension")]
+        public int ExtensionId { get; set; }
+        public string Extension { get; set; }
+
         [Required(ErrorMessage = "Please enter the number of pages.")]
         [Display(Name = "Total pages of the book")]
         public int? TotalPages { get; set; }

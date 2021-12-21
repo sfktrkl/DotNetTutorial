@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tutorial.Data;
 
 namespace Tutorial.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    partial class BookStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20211221231134_AddExtensions")]
+    partial class AddExtensions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +43,9 @@ namespace Tutorial.Migrations
                     b.Property<int>("ExtensionId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ExtensionsId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Keyword")
                         .HasColumnType("nvarchar(max)");
 
@@ -58,12 +63,12 @@ namespace Tutorial.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExtensionId");
+                    b.HasIndex("ExtensionsId");
 
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Tutorial.Data.Extension", b =>
+            modelBuilder.Entity("Tutorial.Data.Extensions", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,16 +83,14 @@ namespace Tutorial.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Extension");
+                    b.ToTable("Extensions");
                 });
 
             modelBuilder.Entity("Tutorial.Data.Books", b =>
                 {
-                    b.HasOne("Tutorial.Data.Extension", "Extension")
+                    b.HasOne("Tutorial.Data.Extensions", "Extensions")
                         .WithMany("Books")
-                        .HasForeignKey("ExtensionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExtensionsId");
                 });
 #pragma warning restore 612, 618
         }

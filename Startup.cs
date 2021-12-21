@@ -49,6 +49,7 @@ namespace Tutorial
 
             // To be able to use the BookRepository dependency.
             services.AddScoped<BookRepository, BookRepository>();
+            services.AddScoped<ExtensionRepository, ExtensionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

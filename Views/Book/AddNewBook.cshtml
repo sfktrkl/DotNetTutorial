@@ -87,6 +87,14 @@
         </div>
 
         <div class="form-group">
+            <label asp-for="ExtensionId"></label>
+            <select asp-for="ExtensionId" class="form-control" asp-items="ViewBag.Extension">
+                <option value="">Choose the extension</option>
+            </select>
+            <span asp-validation-for="ExtensionId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
             <input type="submit" value="Add book" class="btn btn-primary" />
         </div>
     </form>

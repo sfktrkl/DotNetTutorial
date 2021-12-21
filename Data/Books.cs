@@ -16,6 +16,13 @@ namespace Tutorial.Data
         public string Keyword { get; set; }
         public int TotalPages { get; set; }
 
+        // The table should also be provided.
+        // The name of the table is important,
+        // it is better matching the name of the table
+        // and the Id.
+        public int ExtensionId { get; set; }
+        public Extension Extension { get; set; }
+
         // From package manager console,
         // Use Add-Migration command to create a table.
         // Created class contains two methods,

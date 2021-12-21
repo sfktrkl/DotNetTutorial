@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211221230959_AddExtensions.cs" />
+    <Compile Remove="Migrations\20211221230959_AddExtensions.Designer.cs" />
+    <Compile Remove="Migrations\20211221231104_AddExtensions2.cs" />
+    <Compile Remove="Migrations\20211221231104_AddExtensions2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.22">

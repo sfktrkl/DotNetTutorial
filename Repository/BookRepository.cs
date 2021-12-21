@@ -31,6 +31,7 @@ namespace Tutorial.Repository
                 Category = model.Category,
                 Language = model.Language,
                 Keyword = model.Keyword,
+                ExtensionId = model.ExtensionId,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };
@@ -48,32 +49,8 @@ namespace Tutorial.Repository
         {
             // Get the books from the database and use an
             // async call to do this.
-            var data = await _context.Books.ToListAsync();
-            var books = new List<BookModel>();
-            if (data?.Any() == true)
-            {
-                foreach (var book in data)
-                    books.Add(new BookModel() { 
-                        Id = book.Id,
-                        Title = book.Title,
-                        Author = book.Author,
-                        Description = book.Description,
-                        Category = book.Category,
-                        Language = book.Language,
-                        Keyword = book.Keyword,
-                        TotalPages = book.TotalPages
-                    });
-            }
-            return books;
-        }
-
-        public async Task<BookModel> GetBookById(int id)
-        {
-            // Get the book from the database.
-            var book = await _context.Books.FindAsync(id);
-            if (book != null)
-            {
-                return new BookModel()
+            return await _context.Books
+                .Select(book => new BookModel()
                 {
                     Id = book.Id,
                     Title = book.Title,
@@ -82,10 +59,29 @@ namespace Tutorial.Repository
                     Category = book.Category,
                     Language = book.Language,
                     Keyword = book.Keyword,
+                    ExtensionId = book.ExtensionId,
+                    Extension = book.Extension.Name,
                     TotalPages = book.TotalPages
-                };
-            }
-            return null;
+                }).ToListAsync();
+        }
+
+        public async Task<BookModel> GetBookById(int id)
+        {
+            // Get the book from the database.
+            return await _context.Books.Where(x => x.Id == id)
+                .Select(book => new BookModel()
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Description = book.Description,
+                    Category = book.Category,
+                    Language = book.Language,
+                    Keyword = book.Keyword,
+                    ExtensionId = book.ExtensionId,
+                    Extension = book.Extension.Name,
+                    TotalPages = book.TotalPages
+                }).FirstOrDefaultAsync();
         }
 
         public List<BookModel> SearchBook(string title, string authorName)

@@ -20,11 +20,13 @@ namespace Tutorial.Controllers
     public class BookController : Controller
     {
         private readonly BookRepository _bookRepository = null;
-        public BookController(BookRepository bookRepository)
+        private readonly ExtensionRepository _extensionRepository = null;
+        public BookController(BookRepository bookRepository, ExtensionRepository extensionRepository)
         {
             // Use dependency injection to resolve dependency.
             // It is assigned in Startup.ConfigureServices.
             _bookRepository = bookRepository;
+            _extensionRepository = extensionRepository;
         }
 
         // All public methods of a controller class are known as Action method.
@@ -99,7 +101,7 @@ namespace Tutorial.Controllers
             };
         }
 
-        public ViewResult AddNewBook(bool isSuccess = false, int bookId = 0)
+        public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
             // Form is used to get data from user.
             // A form has various input options for user,
@@ -125,6 +127,9 @@ namespace Tutorial.Controllers
             // It is also possible passing the default with model.
             ViewBag.Keyword = new SelectList(GetKeywords(), "Id", "Keyword");
             book.Keyword = "1";
+
+            // Get the extensions from the database.
+            ViewBag.Extension = new SelectList(await _extensionRepository.GetLanguages(), "Id", "Name");
 
             return View(book);
         }
@@ -167,6 +172,9 @@ namespace Tutorial.Controllers
                     Disabled=true,
                     Selected=false
                 });
+
+                // Get the extensions from the database.
+                ViewBag.Extension = new SelectList(await _extensionRepository.GetLanguages(), "Id", "Name");
                 return View();
             }
             // To handle the post request coming from
