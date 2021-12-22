@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using Tutorial.Helpers;
 using Tutorial.Enums;
 
 namespace Tutorial.Models
@@ -23,6 +24,7 @@ namespace Tutorial.Models
         // field type etc. for a particular field.
         [StringLength(100)]
         [Required(ErrorMessage = "Please enter the title of the book.")]
+        [BookValidation("book", ErrorMessage = "Book name cannot contain 'book'")]
         public string Title { get; set; }
         [StringLength(100, MinimumLength = 5)]
         [Required(ErrorMessage = "Please enter the Author name.")]
