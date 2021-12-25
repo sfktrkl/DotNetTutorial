@@ -4,5 +4,14 @@
     // @await Component.InvokeAsync("View component name", {Type containing parameters})
     // <vc:[view-component-name] parameter="value"></vc:[view-component-name]>
 }
+@model IEnumerable<BookModel>
 
-<h1>Top books</h1>
+<div class="row">
+    @foreach (var book in Model)
+    {
+        <div class="col-md-4">
+            <partial name="_BookThumbnail" model="@book"/>
+        </div>
+    }
+</div>
+

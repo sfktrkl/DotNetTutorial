@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Tutorial.Repository;
 
 namespace Tutorial.Components
 {
@@ -17,9 +18,18 @@ namespace Tutorial.Components
     // /Pages/Shared/{Controller}/Components/{View Component}/{View}
     public class TopBooksViewComponent : ViewComponent
     {
+        private readonly BookRepository _bookRepository = null;
+        public TopBooksViewComponent(BookRepository bookRepository)
+        {
+            // Use dependency injection to resolve dependency.
+            // It is assigned in Startup.ConfigureServices.
+            _bookRepository = bookRepository;
+        }
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            var books = await _bookRepository.GetTopBooksAsync();
+            return View(books);
         }
     }
 }

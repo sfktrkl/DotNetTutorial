@@ -78,6 +78,25 @@ namespace Tutorial.Repository
                 }).ToListAsync();
         }
 
+        public async Task<List<BookModel>> GetTopBooksAsync()
+        {
+            return await _context.Books
+                .Select(book => new BookModel()
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Description = book.Description,
+                    Category = book.Category,
+                    Language = book.Language,
+                    Keyword = book.Keyword,
+                    ExtensionId = book.ExtensionId,
+                    Extension = book.Extension.Name,
+                    CoverPhotoUrl = book.CoverPhotoUrl,
+                    TotalPages = book.TotalPages
+                }).Take(3).ToListAsync();
+        }
+
         public async Task<BookModel> GetBookById(int id)
         {
             // Get the book from the database.
