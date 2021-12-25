@@ -44,7 +44,12 @@ namespace Tutorial
             // Make changes in the startup file, add it conditionally,
             // so that it won't affect the performance.
 #if DEBUG
-            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(option =>
+            {
+                // It is possible disabling client-side validation.
+                // Still, better to apply it for the release version.
+                option.HtmlHelperOptions.ClientValidationEnabled = false;
+            });
 #endif
 
             // To be able to use the BookRepository dependency.

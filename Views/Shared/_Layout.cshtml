@@ -84,11 +84,28 @@
         </div>
     </footer>
 
+    @{ 
+        // We are implementing server side validations
+        // by using some model validation attributes.
+        // A request goes from client to server and 
+        // data gets validated in the server and a
+        // response is send.
+        // This causes each request to come to server
+        // hence performance problems. So, client side
+        // validations will be better in terms of performance.
+        // Use jquery-validate and and jquery-validation-unobtrusive
+        // Those libraries will make validations not hit
+        // the server and validations will happen in client side.
+    }
     <environment include="Development">
         <script src="~/lib/jquery/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="~/lib/jquery/jquery.min.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     </environment>
     @{ 
         // RenderSection is a space with specific
