@@ -14,6 +14,8 @@
 
 <div class="py-5 bg-light">
     <div class="container">
+        @*@await Component.InvokeAsync("TopBooks")*@
+        <vc:top-books></vc:top-books>
         <div class="row">
             <div class="col-md-4">
                 @*Html.Partial("_BookThumbnail", new BookModel())*@
