@@ -36,6 +36,16 @@ namespace Tutorial.Repository
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };
+            book.Gallery = new List<Gallery>();
+            foreach (var file in model.Gallery)
+            {
+                book.Gallery.Add(new Gallery()
+                { 
+                    Name = file.Name,
+                    Url = file.Url
+                });
+            }
+
             // Using asynchronous calls are important to
             // make application robust and fast. Since, we
             // are working with the databases.
@@ -83,6 +93,11 @@ namespace Tutorial.Repository
                     ExtensionId = book.ExtensionId,
                     Extension = book.Extension.Name,
                     CoverPhotoUrl = book.CoverPhotoUrl,
+                    Gallery = book.Gallery.Select(g => new GalleryModel() {
+                        Id = g.Id,
+                        Name = g.Name,
+                        Url = g.Url
+                    }).ToList(),
                     TotalPages = book.TotalPages
                 }).FirstOrDefaultAsync();
         }

@@ -68,5 +68,12 @@ namespace Tutorial.Models
         [Display(Name = "Choose cover photo")]
         public IFormFile CoverPhoto { get; set; }
         public string CoverPhotoUrl { get; set; }
+
+        [Required]
+        [Display(Name = "Choose images of your book")]
+        //public List<IFormFile> GalleryFiles { get; set; }
+        //public IEnumerable<IFormFile> GalleryFiles { get; set; }
+        public IFormFileCollection GalleryFiles { get; set; }
+        public List<GalleryModel> Gallery { get; set; }
     }
 }

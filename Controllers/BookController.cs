@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tutorial.Repository;
@@ -140,6 +141,20 @@ namespace Tutorial.Controllers
             return View(book);
         }
 
+        private async Task<string> UploadImage(string folder, IFormFile file)
+        {
+            // Since uploaded files may have the same name,
+            // it may cause problems, so make them unique.
+            folder += Guid.NewGuid().ToString() + "_" + file.FileName;
+            // To be able to get the actual path of the folder,
+            // use web host environment and combine the paths.
+            string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+            // Save the file to the folder.
+            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+            return "\\" + folder;
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
@@ -186,17 +201,21 @@ namespace Tutorial.Controllers
             // Save the cover photo before adding the new book.
             if (bookModel.CoverPhoto != null)
             {
-                string folder = "books\\cover\\";
-                // Since uploaded files may have the same name,
-                // it may cause problems, so make them unique.
-                folder +=  Guid.NewGuid().ToString() + "_" + bookModel.CoverPhoto.FileName;
-                // To be able to get the actual path of the folder,
-                // use web host environment and combine the paths.
-                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
-                // Save the file to the folder.
-                await bookModel.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
                 // Save the url to book model, so that path can be saved to database.
-                bookModel.CoverPhotoUrl = "/" + folder;
+                bookModel.CoverPhotoUrl = await UploadImage("books\\cover\\", bookModel.CoverPhoto);
+            }
+            // Save the gallery files before adding the new book.
+            if (bookModel.GalleryFiles != null)
+            {
+                bookModel.Gallery = new List<GalleryModel>();
+                foreach (var file in bookModel.GalleryFiles)
+                {
+                    bookModel.Gallery.Add(new GalleryModel()
+                    {
+                        Name = file.FileName,
+                        Url = await UploadImage("books\\gallery\\", file)
+                    });
+                }
             }
             // To handle the post request coming from
             // the form, this action method is needed.

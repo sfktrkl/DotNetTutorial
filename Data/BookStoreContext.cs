@@ -24,6 +24,7 @@ namespace Tutorial.Data
 
         public DbSet<Books> Books { get; set; }
         public DbSet<Extension> Extension { get; set; }
+        public DbSet<Gallery> Gallery { get; set; }
 
         // To connect with a database use this method.
         // Otherwise pass the option stream during Startup.ConfigureServices.

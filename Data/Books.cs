@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 
 namespace Tutorial.Data
 {
@@ -24,6 +25,8 @@ namespace Tutorial.Data
         // and the Id.
         public int ExtensionId { get; set; }
         public Extension Extension { get; set; }
+
+        public ICollection<Gallery> Gallery { get; set; }
 
         // From package manager console,
         // Use Add-Migration command to create a table.

@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20211221230959_AddExtensions.Designer.cs" />
     <Compile Remove="Migrations\20211221231104_AddExtensions2.cs" />
     <Compile Remove="Migrations\20211221231104_AddExtensions2.Designer.cs" />
+    <Compile Remove="Migrations\20211225185927_AddGallery.cs" />
+    <Compile Remove="Migrations\20211225185927_AddGallery.Designer.cs" />
+    <Compile Remove="Migrations\20211225191345_AddGalleryTable.cs" />
+    <Compile Remove="Migrations\20211225191345_AddGalleryTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
