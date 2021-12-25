@@ -78,7 +78,7 @@ namespace Tutorial.Repository
                 }).ToListAsync();
         }
 
-        public async Task<List<BookModel>> GetTopBooksAsync()
+        public async Task<List<BookModel>> GetTopBooksAsync(int count)
         {
             return await _context.Books
                 .Select(book => new BookModel()
@@ -94,7 +94,7 @@ namespace Tutorial.Repository
                     Extension = book.Extension.Name,
                     CoverPhotoUrl = book.CoverPhotoUrl,
                     TotalPages = book.TotalPages
-                }).Take(3).ToListAsync();
+                }).Take(count).ToListAsync();
         }
 
         public async Task<BookModel> GetBookById(int id)

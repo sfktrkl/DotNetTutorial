@@ -26,9 +26,9 @@ namespace Tutorial.Components
             _bookRepository = bookRepository;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int count)
         {
-            var books = await _bookRepository.GetTopBooksAsync();
+            var books = await _bookRepository.GetTopBooksAsync(count);
             return View(books);
         }
     }
