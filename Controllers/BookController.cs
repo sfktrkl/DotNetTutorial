@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -6,6 +7,8 @@ using Tutorial.Repository;
 using Tutorial.Models;
 using System.Dynamic;
 using System.Linq;
+using System.IO;
+using System;
 
 namespace Tutorial.Controllers
 {
@@ -21,12 +24,15 @@ namespace Tutorial.Controllers
     {
         private readonly BookRepository _bookRepository = null;
         private readonly ExtensionRepository _extensionRepository = null;
-        public BookController(BookRepository bookRepository, ExtensionRepository extensionRepository)
+        private readonly IWebHostEnvironment _webHostEnvironment = null;
+        public BookController(BookRepository bookRepository, ExtensionRepository extensionRepository,
+            IWebHostEnvironment webHostEnvironment)
         {
             // Use dependency injection to resolve dependency.
             // It is assigned in Startup.ConfigureServices.
             _bookRepository = bookRepository;
             _extensionRepository = extensionRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // All public methods of a controller class are known as Action method.
@@ -176,6 +182,19 @@ namespace Tutorial.Controllers
                 // Get the extensions from the database.
                 ViewBag.Extension = new SelectList(await _extensionRepository.GetLanguages(), "Id", "Name");
                 return View();
+            }
+            // Save the cover photo before adding the new book.
+            if (bookModel.CoverPhoto != null)
+            {
+                string folder = "books\\cover\\";
+                // Since uploaded files may have the same name,
+                // it may cause problems, so make them unique.
+                folder +=  Guid.NewGuid().ToString() + "_" + bookModel.CoverPhoto.FileName;
+                // To be able to get the actual path of the folder,
+                // use web host environment and combine the paths.
+                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                // Save the file to the folder.
+                await bookModel.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
             }
             // To handle the post request coming from
             // the form, this action method is needed.

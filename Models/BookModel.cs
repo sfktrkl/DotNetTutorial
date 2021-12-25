@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Tutorial.Helpers;
 using Tutorial.Enums;
 
@@ -58,5 +59,13 @@ namespace Tutorial.Models
         [Required(ErrorMessage = "Please enter the number of pages.")]
         [Display(Name = "Total pages of the book")]
         public int? TotalPages { get; set; }
+
+        // Since image is an heavy file (blob) instead of 
+        // uploading them to the database data should be
+        // saved to an other place like Azure blob storage.
+        // wwwroot file can be used to store those files for now.
+        [Required]
+        [Display(Name = "Choose cover photo")]
+        public IFormFile CoverPhoto { get; set; }
     }
 }
