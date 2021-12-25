@@ -18,6 +18,7 @@ namespace Tutorial.Data
         public int TotalPages { get; set; }
 
         public string CoverPhotoUrl { get; set; }
+        public string BookPdfUrl { get; set; }
 
         // The table should also be provided.
         // The name of the table is important,

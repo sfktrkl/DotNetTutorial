@@ -75,5 +75,11 @@ namespace Tutorial.Models
         //public IEnumerable<IFormFile> GalleryFiles { get; set; }
         public IFormFileCollection GalleryFiles { get; set; }
         public List<GalleryModel> Gallery { get; set; }
+
+        [Required]
+        [Display(Name = "Choose book file")]
+        public IFormFile BookPdf { get; set; }
+        public string BookPdfUrl { get; set; }
+
     }
 }

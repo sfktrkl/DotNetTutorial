@@ -141,7 +141,7 @@ namespace Tutorial.Controllers
             return View(book);
         }
 
-        private async Task<string> UploadImage(string folder, IFormFile file)
+        private async Task<string> UploadFile(string folder, IFormFile file)
         {
             // Since uploaded files may have the same name,
             // it may cause problems, so make them unique.
@@ -202,7 +202,7 @@ namespace Tutorial.Controllers
             if (bookModel.CoverPhoto != null)
             {
                 // Save the url to book model, so that path can be saved to database.
-                bookModel.CoverPhotoUrl = await UploadImage("books\\cover\\", bookModel.CoverPhoto);
+                bookModel.CoverPhotoUrl = await UploadFile("books\\cover\\", bookModel.CoverPhoto);
             }
             // Save the gallery files before adding the new book.
             if (bookModel.GalleryFiles != null)
@@ -213,9 +213,15 @@ namespace Tutorial.Controllers
                     bookModel.Gallery.Add(new GalleryModel()
                     {
                         Name = file.FileName,
-                        Url = await UploadImage("books\\gallery\\", file)
+                        Url = await UploadFile("books\\gallery\\", file)
                     });
                 }
+            }
+            // Save the book pdf before adding the new book.
+            if (bookModel.BookPdf != null)
+            {
+                // Save the url to book model, so that path can be saved to database.
+                bookModel.BookPdfUrl = await UploadFile("books\\pdf\\", bookModel.BookPdf);
             }
             // To handle the post request coming from
             // the form, this action method is needed.

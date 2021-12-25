@@ -43,6 +43,7 @@ wwwroot/lib
 # Photos
 wwwroot/books/cover
 wwwroot/books/gallery
+wwwroot/books/pdf
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/

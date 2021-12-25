@@ -33,6 +33,7 @@ namespace Tutorial.Repository
                 Keyword = model.Keyword,
                 ExtensionId = model.ExtensionId,
                 CoverPhotoUrl = model.CoverPhotoUrl,
+                BookPdfUrl = model.BookPdfUrl,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };
@@ -93,6 +94,7 @@ namespace Tutorial.Repository
                     ExtensionId = book.ExtensionId,
                     Extension = book.Extension.Name,
                     CoverPhotoUrl = book.CoverPhotoUrl,
+                    BookPdfUrl = book.BookPdfUrl,
                     Gallery = book.Gallery.Select(g => new GalleryModel() {
                         Id = g.Id,
                         Name = g.Name,
