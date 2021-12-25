@@ -37,52 +37,26 @@
     <link href="~/css/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <header class="header text-muted text-center border-bottom">
-        <nav class="navbar navbar-expand-sm">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-                    <img src="~/images/logo.png" width="30" height="30" asp-append-version="true"/>
-                </a>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Welcome</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="RazorViewEngine">Razor</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Book" asp-action="GetAllBooksFromRepository">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Book" asp-action="AddNewBook">Add New Book</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-protocol="https" asp-host="game-pit.web.app" asp-controller="Morz" asp-action="morse">Morse</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="AboutUs">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    @{
+        // Partial view is a Razor file that is used to
+        // render content within other view file output.
+        // In general partial view is a normal Razor file
+        // but how it used makes it special.
+        // To remove duplicate code or when break up a
+        // large file to small components, they can be helpful.
+        // There are two ways to render Partial views.
+        // Tag helper (partial tag helper) and HTML helper.
+        // Inside HTML helper, there are four methods
+        // Partial, PartialAsync, RenderPartial and RenderPartialAsync
+    }
+    <partial name="_Header" />
 
     <main role="main">
         <h1 class="text-center">@ViewData["Title"]</h1>
         @RenderBody()
     </main>
 
-    <footer class="footer text-muted text-center border-top">
-        <div class="container">
-            Copyright &copy; Tutorial @DateTime.Now.Year
-            <custom-email my-email="sfktrkl@gmail.com"></custom-email>
-        </div>
-    </footer>
+    <partial name="_Footer" />
 
     @{ 
         // We are implementing server side validations
