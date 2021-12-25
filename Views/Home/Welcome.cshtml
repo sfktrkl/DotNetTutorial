@@ -16,10 +16,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <partial name="_BookThumbnail" model="new BookModel()"/>
+                @*Html.Partial("_BookThumbnail", new BookModel())*@
+                @await Html.PartialAsync("_BookThumbnail", new BookModel())
             </div>
             <div class="col-md-4">
-                <partial name="_BookThumbnail" model="new BookModel()"/>
+                @*{ Html.RenderPartial("_BookThumbnail", new BookModel()); }*@
+                @{ await Html.RenderPartialAsync("_BookThumbnail", new BookModel()); }
             </div>
             <div class="col-md-4">
                 <partial name="_BookThumbnail" model="new BookModel()"/>
