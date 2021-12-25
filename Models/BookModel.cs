@@ -67,5 +67,6 @@ namespace Tutorial.Models
         [Required]
         [Display(Name = "Choose cover photo")]
         public IFormFile CoverPhoto { get; set; }
+        public string CoverPhotoUrl { get; set; }
     }
 }

@@ -195,6 +195,8 @@ namespace Tutorial.Controllers
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 // Save the file to the folder.
                 await bookModel.CoverPhoto.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                // Save the url to book model, so that path can be saved to database.
+                bookModel.CoverPhotoUrl = "/" + folder;
             }
             // To handle the post request coming from
             // the form, this action method is needed.

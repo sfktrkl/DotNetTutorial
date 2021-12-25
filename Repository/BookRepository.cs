@@ -32,6 +32,7 @@ namespace Tutorial.Repository
                 Language = model.Language,
                 Keyword = model.Keyword,
                 ExtensionId = model.ExtensionId,
+                CoverPhotoUrl = model.CoverPhotoUrl,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };
@@ -61,6 +62,7 @@ namespace Tutorial.Repository
                     Keyword = book.Keyword,
                     ExtensionId = book.ExtensionId,
                     Extension = book.Extension.Name,
+                    CoverPhotoUrl = book.CoverPhotoUrl,
                     TotalPages = book.TotalPages
                 }).ToListAsync();
         }
@@ -80,6 +82,7 @@ namespace Tutorial.Repository
                     Keyword = book.Keyword,
                     ExtensionId = book.ExtensionId,
                     Extension = book.Extension.Name,
+                    CoverPhotoUrl = book.CoverPhotoUrl,
                     TotalPages = book.TotalPages
                 }).FirstOrDefaultAsync();
         }

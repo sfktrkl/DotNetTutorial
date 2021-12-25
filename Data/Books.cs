@@ -16,6 +16,8 @@ namespace Tutorial.Data
         public string Keyword { get; set; }
         public int TotalPages { get; set; }
 
+        public string CoverPhotoUrl { get; set; }
+
         // The table should also be provided.
         // The name of the table is important,
         // it is better matching the name of the table
