@@ -5,6 +5,8 @@
     // It is possible using form tag helpers
     // to get inputs for the model.
 }
+@inject Tutorial.Repository.IExtensionRepository _extensionRepository
+
 <div class="container">
     @if (ViewBag.IsSuccess == true)
     {
@@ -100,7 +102,8 @@
 
         <div class="form-group">
             <label asp-for="ExtensionId"></label>
-            <select asp-for="ExtensionId" class="form-control" asp-items="ViewBag.Extension">
+            <select asp-for="ExtensionId" class="form-control"
+                    asp-items="(await _extensionRepository.GetExtensions()).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString()})">
                 <option value="">Choose the extension</option>
             </select>
             <span asp-validation-for="ExtensionId" class="text-danger"></span>

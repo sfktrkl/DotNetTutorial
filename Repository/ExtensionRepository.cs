@@ -16,7 +16,7 @@ namespace Tutorial.Repository
             _context = context;
         }
 
-        public async Task<List<ExtensionModel>> GetLanguages()
+        public async Task<List<ExtensionModel>> GetExtensions()
         {
             return await _context.Extension.Select(x => new ExtensionModel()
             {

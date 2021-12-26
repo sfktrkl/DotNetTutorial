@@ -147,9 +147,6 @@ namespace Tutorial.Controllers
             ViewBag.Keyword = new SelectList(GetKeywords(), "Id", "Keyword");
             book.Keyword = "1";
 
-            // Get the extensions from the database.
-            ViewBag.Extension = new SelectList(await _extensionRepository.GetLanguages(), "Id", "Name");
-
             return View(book);
         }
 
@@ -206,8 +203,6 @@ namespace Tutorial.Controllers
                     Selected=false
                 });
 
-                // Get the extensions from the database.
-                ViewBag.Extension = new SelectList(await _extensionRepository.GetLanguages(), "Id", "Name");
                 return View();
             }
             // Save the cover photo before adding the new book.

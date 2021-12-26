@@ -142,5 +142,10 @@ namespace Tutorial.Repository
             };
         }
 
+        public string GetAppName()
+        {
+            return "Tutorial";
+        }
+
     }
 }

@@ -31,6 +31,7 @@
     // Development, Staging, Production or any custom.
     // Environment tag attributes: names, include, exclude
 }
+@inject Tutorial.Repository.IBookRepository _bookRepository
 
 <img src="~/images/logo.png" alt="logo" class="logo" />
 <img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo" />
@@ -87,3 +88,10 @@ CustomBook: @customBook.Id @customBook.Author
 <br />
 <big>Big using tag.</big>
 <p big>Big using attribute.</p>
+
+<br />
+@foreach (var item in await _bookRepository.GetAllBooks())
+{
+    <h2>@item.Title</h2>
+}
+

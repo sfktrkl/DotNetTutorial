@@ -6,6 +6,6 @@ namespace Tutorial.Repository
 {
     public interface IExtensionRepository
     {
-        Task<List<ExtensionModel>> GetLanguages();
+        Task<List<ExtensionModel>> GetExtensions();
     }
 }
