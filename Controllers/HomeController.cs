@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
 using Tutorial.Models;
 using System.Dynamic;
@@ -8,6 +9,13 @@ namespace Tutorial.Controllers
     //[Route("[controller]/[action]")]
     public class HomeController : Controller
     {
+        private readonly IConfiguration _configuration;
+
+        public HomeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         // This property will be created as ViewData.
         [ViewData]
         public string CustomProperty { get; set; }
@@ -53,6 +61,12 @@ namespace Tutorial.Controllers
             CustomProperty = "Custom value";
             CustomTitle = "Welcome to the tutorial";
             CustomBook = new BookModel() { Id=9, Author="Hazal" };
+
+            // Configurations which are set in the appsettings
+            // can be used with IConfiguration.
+            ViewBag.Key1 = _configuration["info:key1"];
+            ViewBag.Key2 = _configuration["info:key2"];
+            ViewBag.Key3 = _configuration["info:key3:key3obj1"];
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.

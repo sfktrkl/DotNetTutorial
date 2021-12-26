@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tutorial.Models;
@@ -11,13 +12,15 @@ namespace Tutorial.Repository
     public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context = null;
+        private readonly IConfiguration _configuration;
 
-        public BookRepository(BookStoreContext context)
+        public BookRepository(BookStoreContext context, IConfiguration configuration)
         {
             // If dependency injections are used this
             // dependency will be resolved automatically
             // during Startup.ConfigureServices.
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task<int> AddNewBook(BookModel model)
@@ -144,7 +147,7 @@ namespace Tutorial.Repository
 
         public string GetAppName()
         {
-            return "Tutorial";
+            return _configuration["AppName"];
         }
 
     }

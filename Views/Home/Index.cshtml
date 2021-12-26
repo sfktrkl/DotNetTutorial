@@ -32,6 +32,7 @@
     // Environment tag attributes: names, include, exclude
 }
 @inject Tutorial.Repository.IBookRepository _bookRepository
+@inject Microsoft.Extensions.Configuration.IConfiguration _configuration
 
 <img src="~/images/logo.png" alt="logo" class="logo" />
 <img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo" />
@@ -94,4 +95,14 @@ CustomBook: @customBook.Id @customBook.Author
 {
     <h2>@item.Title</h2>
 }
+
+<br />
+@ViewBag.Key1
+<br />
+@ViewBag.Key2
+<br />
+@ViewBag.Key3
+
+<br />
+@_configuration["AppName"]
 
