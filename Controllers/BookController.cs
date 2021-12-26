@@ -73,7 +73,17 @@ namespace Tutorial.Controllers
         {
             return $"Book {id}";
         }
-        [Route("book-details/{id}", Name = "bookDetails")]
+        // Use routing constratins to allow only defined routes
+        // Routing constraints, Type, Length, Alpha, Regex, Required
+        [Route("book-details/{id:int:min(1)}", Name = "bookDetails")]
+        // To get the alphabetical inputs
+        //[Route("book-details/{id:alpha}")]
+        // To be able to set minimum length of the input
+        //[Route("book-details/{id:alpha:minlength(5)}")]
+        // It is possible to use a regex
+        //[Route("book-details/{id:alpha:minlength(5):regex("[A-z]")}")]
+        // It is possible creating some partial routes
+        //[Route("book-details/book{id}")]
         public async Task<ViewResult> GetBookFromRepository(int id)
         {
             var data = await _bookRepository.GetBookById(id);
