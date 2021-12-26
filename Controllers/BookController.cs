@@ -23,10 +23,12 @@ namespace Tutorial.Controllers
     // methods for home page, about page, contacts etc.
     public class BookController : Controller
     {
-        private readonly BookRepository _bookRepository = null;
-        private readonly ExtensionRepository _extensionRepository = null;
+        private readonly IBookRepository _bookRepository = null;
+        private readonly IExtensionRepository _extensionRepository = null;
         private readonly IWebHostEnvironment _webHostEnvironment = null;
-        public BookController(BookRepository bookRepository, ExtensionRepository extensionRepository,
+        public BookController(
+            IBookRepository bookRepository, 
+            IExtensionRepository extensionRepository,
             IWebHostEnvironment webHostEnvironment)
         {
             // Use dependency injection to resolve dependency.

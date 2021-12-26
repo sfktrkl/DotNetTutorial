@@ -8,7 +8,7 @@ using System;
 
 namespace Tutorial.Repository
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context = null;
 
@@ -41,7 +41,7 @@ namespace Tutorial.Repository
             foreach (var file in model.Gallery)
             {
                 book.Gallery.Add(new Gallery()
-                { 
+                {
                     Name = file.Name,
                     Url = file.Url
                 });
@@ -114,7 +114,8 @@ namespace Tutorial.Repository
                     Extension = book.Extension.Name,
                     CoverPhotoUrl = book.CoverPhotoUrl,
                     BookPdfUrl = book.BookPdfUrl,
-                    Gallery = book.Gallery.Select(g => new GalleryModel() {
+                    Gallery = book.Gallery.Select(g => new GalleryModel()
+                    {
                         Id = g.Id,
                         Name = g.Name,
                         Url = g.Url

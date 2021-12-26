@@ -18,8 +18,8 @@ namespace Tutorial.Components
     // /Pages/Shared/{Controller}/Components/{View Component}/{View}
     public class TopBooksViewComponent : ViewComponent
     {
-        private readonly BookRepository _bookRepository = null;
-        public TopBooksViewComponent(BookRepository bookRepository)
+        private readonly IBookRepository _bookRepository = null;
+        public TopBooksViewComponent(IBookRepository bookRepository)
         {
             // Use dependency injection to resolve dependency.
             // It is assigned in Startup.ConfigureServices.

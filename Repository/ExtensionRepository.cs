@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Tutorial.Repository
 {
-    public class ExtensionRepository
+    public class ExtensionRepository : IExtensionRepository
     {
         private readonly BookStoreContext _context = null;
 

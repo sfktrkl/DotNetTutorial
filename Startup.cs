@@ -52,9 +52,30 @@ namespace Tutorial
             });
 #endif
 
-            // To be able to use the BookRepository dependency.
-            services.AddScoped<BookRepository, BookRepository>();
-            services.AddScoped<ExtensionRepository, ExtensionRepository>();
+            // Dependency Injection is the technique
+            // to achieve inversion of control.
+            // To make classes loosely coupling.
+            // Asp.Net core provides the built-in support.
+            // Dependencies are registered in containers
+            // and the container is IServiceProvider.
+            // Services are typically registered in the
+            // applications' Startup.ConfigureServices method.
+            // Service can be registered with following lifetimes
+            // Transient - A new instance of the service will be
+            // created every time it is requested.
+            // Scoped - These are created once per client request.
+            // Singleton - Intance will be same for entire application.
+            // This way it will be possible using another class just by
+            // selecting another implemantation of the interface.
+            // Also, container will not be responsible from creating
+            // the instance of the repository rather it will created
+            // by the dependency injection container.
+            // Controller will not define the implementation of the
+            // repository, only the interface of this repository is used
+            // in the controller, this makes easy to change the implementation
+            // of the repository without modifiying the controller class.
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IExtensionRepository, ExtensionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
