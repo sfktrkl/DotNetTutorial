@@ -106,3 +106,15 @@ CustomBook: @customBook.Id @customBook.Author
 <br />
 @_configuration["AppName"]
 
+<br />
+@ViewBag.NewBookAlert
+@ViewBag.Message
+
+<br />
+@if (_configuration.GetValue<bool>("NewBookAlert:DisplayNewBookAlert"))
+{
+    <div class="alert alert-info" role="alert">
+        @(_configuration.GetValue<string>("NewBookAlert:Message"))
+    </div>
+}
+

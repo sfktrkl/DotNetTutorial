@@ -68,6 +68,13 @@ namespace Tutorial.Controllers
             ViewBag.Key2 = _configuration["info:key2"];
             ViewBag.Key3 = _configuration["info:key3:key3obj1"];
 
+            // Configuration is returning a string to be able to get
+            // the value with the correct value type use GetValue.
+            // This method will also return the default value
+            // of the type if the key does not exist.
+            ViewBag.NewBookAlert = _configuration.GetValue<bool>("NewBookAlert:DisplayNewBookAlert");
+            ViewBag.Message = _configuration.GetValue<string>("NewBookAlert:Message");
+
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
             return View();
