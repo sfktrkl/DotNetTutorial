@@ -118,3 +118,18 @@ CustomBook: @customBook.Id @customBook.Author
     </div>
 }
 
+<br />
+@ViewBag.NewBookAlert2
+@ViewBag.Message2
+
+<br />
+@{ 
+    var alert = _configuration.GetSection("NewBookAlert");
+}
+@if (alert.GetValue<bool>("DisplayNewBookAlert"))
+{
+    <div class="alert alert-info" role="alert">
+        @(alert.GetValue<string>("Message"))
+    </div>
+}
+

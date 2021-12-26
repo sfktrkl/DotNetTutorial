@@ -75,6 +75,11 @@ namespace Tutorial.Controllers
             ViewBag.NewBookAlert = _configuration.GetValue<bool>("NewBookAlert:DisplayNewBookAlert");
             ViewBag.Message = _configuration.GetValue<string>("NewBookAlert:Message");
 
+            // GetSection method can be used to get the section.
+            var alert = _configuration.GetSection("NewBookAlert");
+            ViewBag.NewBookAlert2 = alert.GetValue<bool>("DisplayNewBookAlert");
+            ViewBag.Message2 = alert.GetValue<string>("Message");
+
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
             return View();
