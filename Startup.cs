@@ -74,12 +74,52 @@ namespace Tutorial
                 RequestPath = "/MyStaticFiles"
             });
 
+            // Routing is the process of mapping incoming HTTP requests
+            // to a particular resource. It is possible to define a unique
+            // URL for each resource. In Asp.net core, routing enabled through
+            // middlewares UseRouting and UseEndpoints.
+            // There are two types of routing Conventional and Attribute.
+            // All the routes should be unique with combination of url + http method
+            // For one resource it is possible to define multiple routes.
+            // It is not possible to define same route for multiple resources.
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
                 // Routing to HomeController class
+                // This add the default pattern which is
+                // "{controller=Home}/{action=Index}/{id?}"
                 endpoints.MapDefaultControllerRoute();
+
+                /*
+                // Conventional routing
+                // By using a pattern all HTTP requests should be mapped.
+                endpoints.MapControllerRoute(
+                    name: "Default",
+                    // Create the patter which will map the requests.
+                    // ? tells id parameter is optional
+                    // /home/aboutus
+                    //pattern: "{controller}/{action}/{id?}"
+                    // It is possible changing the order of the pattern.
+                    // /aboutus/home
+                    //pattern: "{action}/{controller}/{id?}"
+                    // It is possible to pass a parameter
+                    // /aboutus/home/1
+                    // It is also possible adding more than one parameter
+                    // /aboutus/home/1?name=myname
+                    //pattern: "{action}/{controller}/{id?}/{name?}"
+                    // Some default values can be applied to the pattern.
+                    //pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
+                */
+
+                // To setup some more routes, which will match with a particular pattern
+                endpoints.MapControllerRoute(
+                    name: "AboutUs",
+                    // /about-us
+                    pattern: "about-us",
+                    defaults: new { controller = "Home", action = "AboutUs" }
+                );
             });
         }
 
