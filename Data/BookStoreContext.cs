@@ -32,7 +32,7 @@ namespace Tutorial.Data
         {
             // Since the server will be local it is used as "."
             // Otherwise give the IP address.
-            optionsBuilder.UseSqlServer("Server=.;Database=BookStore;Integrated Security=True;");
+            //optionsBuilder.UseSqlServer("Server=.;Database=BookStore;Integrated Security=True;");
             base.OnConfiguring(optionsBuilder);
         }
     }

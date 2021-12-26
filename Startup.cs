@@ -5,20 +5,31 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Tutorial
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // To tell the application to use the BookStoreContext.
             // Same connection stream can also be passed from here.
             // Then the OnConfiguring method is not needed.
-            services.AddDbContext<BookStoreContext>();
+            services.AddDbContext<BookStoreContext>(options => 
+                options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"))
+            );
 
             // To add MVC to our application.
             // services.AddMvc();
