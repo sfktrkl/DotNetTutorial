@@ -4,6 +4,8 @@ using System.Dynamic;
 
 namespace Tutorial.Controllers
 {
+    // Token replacement
+    //[Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         // This property will be created as ViewData.
@@ -16,6 +18,9 @@ namespace Tutorial.Controllers
         [ViewData]
         public BookModel CustomBook { get; set; }
 
+        // Since the route is defined in the controller level,
+        // to be able to override them in action method use
+        //[Route("~/")]
         // The index action method
         public ViewResult Index()
         {
@@ -54,6 +59,17 @@ namespace Tutorial.Controllers
             return View();
         }
 
+        // It is possible routing with attribute routing.
+        //[Route("welcome")]
+        // Some parameters can also be set.
+        //[Route("welcome/{id}")],              /welcome/1
+        //[Route("welcome/{id}/{name}")],       /welcome?id=1&name=safak
+        //[Route("welcome/{id}/test/{name}")],  /welcome/1/test/safak
+        // HTTP verbs can also be used with attributes.
+        // So that this action method will only handle one type of request.
+        //[HttpGet("welcome")]
+        // The name and order of the route can also be set.
+        //[Route("welcome", Name = "well", Order = 1)]
         public ViewResult Welcome()
         {
             return View();

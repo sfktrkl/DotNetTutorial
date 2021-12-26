@@ -120,6 +120,9 @@ namespace Tutorial
                     pattern: "about-us",
                     defaults: new { controller = "Home", action = "AboutUs" }
                 );
+
+                // To be able to use token replacement use
+                //endpoints.MapControllers();
             });
         }
 
