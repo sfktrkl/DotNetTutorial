@@ -133,3 +133,20 @@ CustomBook: @customBook.Id @customBook.Author
     </div>
 }
 
+<br />
+@ViewBag.NewBookAlert3.DisplayNewBookAlert
+@ViewBag.NewBookAlert3.Message
+
+<br />
+@{ 
+    var newBookAlert = new NewBookAlertConfig();
+    _configuration.Bind("NewBookAlert", newBookAlert);
+}
+@if (newBookAlert.DisplayNewBookAlert)
+{
+    <div class="alert alert-info" role="alert">
+        @(newBookAlert.Message)
+    </div>
+}
+
+

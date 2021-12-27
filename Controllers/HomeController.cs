@@ -80,6 +80,10 @@ namespace Tutorial.Controllers
             ViewBag.NewBookAlert2 = alert.GetValue<bool>("DisplayNewBookAlert");
             ViewBag.Message2 = alert.GetValue<string>("Message");
 
+            // Bind a configuration to objects using Bind method.
+            ViewBag.NewBookAlert3 = new NewBookAlertConfig();
+            _configuration.Bind("NewBookAlert", (NewBookAlertConfig)ViewBag.NewBookAlert3);
+
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
             return View();
