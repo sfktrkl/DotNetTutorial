@@ -190,3 +190,19 @@ CustomBook: @customBook.Id @customBook.Author
 <br />
 @ViewBag.Message5
 
+<br />
+@ViewBag.NewBookAlert6.DisplayNewBookAlert
+@ViewBag.NewBookAlert6.Message
+
+<br />
+@{ 
+    var thirdPartyBookConfiguration = _newBookAlertConfigurationShapshot.Get("ThirdPartyBook");
+}
+@if (thirdPartyBookConfiguration.DisplayNewBookAlert)
+{
+    <div class="alert alert-info" role="alert">
+        @(thirdPartyBookConfiguration.Message)
+    </div>
+}
+
+

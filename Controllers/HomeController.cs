@@ -15,6 +15,7 @@ namespace Tutorial.Controllers
         private readonly NewBookAlertConfig _newBookAlertConfiguration;
         private readonly NewBookAlertConfig _newBookAlertConfigurationSnapshot;
         private readonly IMessageRepository _messageRepository;
+        private readonly NewBookAlertConfig _thirdParyBookConfiguration;
 
         public HomeController(
             IConfiguration configuration,
@@ -26,6 +27,7 @@ namespace Tutorial.Controllers
             _newBookAlertConfiguration = newBookAlertConfiguration.Value;
             _newBookAlertConfigurationSnapshot = newBookAlertConfigurationSnapshot.Value;
             _messageRepository = messageRepository;
+            _thirdParyBookConfiguration = newBookAlertConfigurationSnapshot.Get("ThirdPartyBook");
         }
 
         // This property will be created as ViewData.
@@ -118,6 +120,9 @@ namespace Tutorial.Controllers
             // Or it is possible storing the IOptionsMonitor directly
             // and getting its current value.
             ViewBag.Message5 = _messageRepository.GetMessageMonitor2();
+
+            // Use named configuration to get the configuration.
+            ViewBag.NewBookAlert6 = _thirdParyBookConfiguration;
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
