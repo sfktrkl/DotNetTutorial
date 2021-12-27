@@ -88,6 +88,7 @@ namespace Tutorial
             // of the repository without modifiying the controller class.
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
+            services.AddSingleton<IMessageRepository, MessageRepository>();
 
             // Read the configuration and send it through the IOptions.
             services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));

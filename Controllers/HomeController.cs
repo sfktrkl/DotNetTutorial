@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
+using Tutorial.Repository;
 using Tutorial.Models;
 using System.Dynamic;
 
@@ -13,15 +14,18 @@ namespace Tutorial.Controllers
         private readonly IConfiguration _configuration;
         private readonly NewBookAlertConfig _newBookAlertConfiguration;
         private readonly NewBookAlertConfig _newBookAlertConfigurationSnapshot;
+        private readonly IMessageRepository _messageRepository;
 
         public HomeController(
             IConfiguration configuration,
             IOptions<NewBookAlertConfig> newBookAlertConfiguration,
-            IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfigurationSnapshot)
+            IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfigurationSnapshot,
+            IMessageRepository messageRepository)
         {
             _configuration = configuration;
             _newBookAlertConfiguration = newBookAlertConfiguration.Value;
             _newBookAlertConfigurationSnapshot = newBookAlertConfigurationSnapshot.Value;
+            _messageRepository = messageRepository;
         }
 
         // This property will be created as ViewData.
@@ -100,6 +104,20 @@ namespace Tutorial.Controllers
             // for each request and it will be possible to get
             // changed options.
             ViewBag.NewBookAlert5 = _newBookAlertConfigurationSnapshot;
+
+            // Use the singleton service in the controller.
+            // Since it is working with IOptions, it will not get the
+            // updates for each request.
+            ViewBag.Message3 = _messageRepository.GetMessage();
+            // It is also not possible using IOptionsSnapshot
+            // to make it scoped, because message repository is a
+            // singleton, their life time will not match. Hence
+            // IOptionsMonitor should be used instead. It should
+            // also assign the value during the OnChange event.
+            ViewBag.Message4 = _messageRepository.GetMessageMonitor();
+            // Or it is possible storing the IOptionsMonitor directly
+            // and getting its current value.
+            ViewBag.Message5 = _messageRepository.GetMessageMonitor2();
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
