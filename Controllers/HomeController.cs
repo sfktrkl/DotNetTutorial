@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
 using Tutorial.Models;
 using System.Dynamic;
@@ -10,10 +11,14 @@ namespace Tutorial.Controllers
     public class HomeController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly NewBookAlertConfig _newBookAlertConfiguration;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(
+            IConfiguration configuration,
+            IOptions<NewBookAlertConfig> newBookAlertConfiguration)
         {
             _configuration = configuration;
+            _newBookAlertConfiguration = newBookAlertConfiguration.Value;
         }
 
         // This property will be created as ViewData.
@@ -83,6 +88,9 @@ namespace Tutorial.Controllers
             // Bind a configuration to objects using Bind method.
             ViewBag.NewBookAlert3 = new NewBookAlertConfig();
             _configuration.Bind("NewBookAlert", (NewBookAlertConfig)ViewBag.NewBookAlert3);
+
+            // Use configuration read by IOptions
+            ViewBag.NewBookAlert4 = _newBookAlertConfiguration;
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.

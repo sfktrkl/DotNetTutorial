@@ -1,5 +1,6 @@
 using System.IO;
 using Tutorial.Data;
+using Tutorial.Models;
 using Tutorial.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -87,6 +88,9 @@ namespace Tutorial
             // of the repository without modifiying the controller class.
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
+
+            // Read the configuration and send it through the IOptions.
+            services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

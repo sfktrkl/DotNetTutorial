@@ -33,6 +33,7 @@
 }
 @inject Tutorial.Repository.IBookRepository _bookRepository
 @inject Microsoft.Extensions.Configuration.IConfiguration _configuration
+@inject Microsoft.Extensions.Options.IOptions<NewBookAlertConfig> _newBookAlertConfiguration
 
 <img src="~/images/logo.png" alt="logo" class="logo" />
 <img src="~/MyStaticFiles/dummy.png" alt="dummy" class="logo" />
@@ -149,4 +150,19 @@ CustomBook: @customBook.Id @customBook.Author
     </div>
 }
 
+<br />
+@ViewBag.NewBookAlert4.DisplayNewBookAlert
+@ViewBag.NewBookAlert4.Message
+
+<br />
+@{ 
+    var newBookAlertConfiguration = _newBookAlertConfiguration.Value;
+}
+
+@if (newBookAlertConfiguration.DisplayNewBookAlert)
+{
+    <div class="alert alert-info" role="alert">
+        @(newBookAlertConfiguration.Message)
+    </div>
+}
 
