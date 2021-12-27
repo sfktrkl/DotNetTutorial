@@ -12,13 +12,16 @@ namespace Tutorial.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly NewBookAlertConfig _newBookAlertConfiguration;
+        private readonly NewBookAlertConfig _newBookAlertConfigurationSnapshot;
 
         public HomeController(
             IConfiguration configuration,
-            IOptions<NewBookAlertConfig> newBookAlertConfiguration)
+            IOptions<NewBookAlertConfig> newBookAlertConfiguration,
+            IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfigurationSnapshot)
         {
             _configuration = configuration;
             _newBookAlertConfiguration = newBookAlertConfiguration.Value;
+            _newBookAlertConfigurationSnapshot = newBookAlertConfigurationSnapshot.Value;
         }
 
         // This property will be created as ViewData.
@@ -91,6 +94,12 @@ namespace Tutorial.Controllers
 
             // Use configuration read by IOptions
             ViewBag.NewBookAlert4 = _newBookAlertConfiguration;
+
+            // Use configuration read by IOptionsSnapshot.
+            // Since it is working as scoped it will get the options
+            // for each request and it will be possible to get
+            // changed options.
+            ViewBag.NewBookAlert5 = _newBookAlertConfigurationSnapshot;
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
