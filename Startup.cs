@@ -99,6 +99,11 @@ namespace Tutorial
             // cannot be used with IOptions, they should use IOptionsSnapshot or IOptionsMonitor.
             // If the service is a singleton, it is also not possible IOptionsSnapshot.
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", _configuration.GetSection("ThirdPartyBook"));
+
+            //                  | Use in singleton | Reloading | Named configurations
+            // IOptions         |       True       |   False   |        False        
+            // IOptionsSnapshot |       False      |   True    |        True         
+            // IOptionsMonitor  |       True       |   True    |        True         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
