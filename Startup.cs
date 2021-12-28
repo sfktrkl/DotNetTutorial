@@ -106,6 +106,7 @@ namespace Tutorial
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
             services.AddSingleton<IMessageRepository, MessageRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
             // Read the configuration and send it through the IOptions.
             services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));
