@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tutorial.Data
 {
@@ -15,7 +16,7 @@ namespace Tutorial.Data
     // Microsoft.EntityFrameworkCore.Relational
     // Microsoft.EntityFrameworkCore.SqlServer (installs above)
     // Microsoft.EntityFrameworkCore.Tools is needed.
-    public class BookStoreContext : DbContext
+    public class BookStoreContext : IdentityDbContext
     {
         public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options)
         {

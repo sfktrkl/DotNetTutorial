@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,22 @@ namespace Tutorial
             services.AddDbContext<BookStoreContext>(options => 
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"))
             );
+
+            // Identity Core is a universal framework to
+            // provide security to any dot net application.
+            // It is not limited to sign up and sign in.
+            // Common framework for all dot net applications.
+            // These are the core features of the Identity Core
+            // All required tables are provided.
+            // Register/Login/Change password
+            // User and password validation
+            // Password hashing and multi factor authentication
+
+            // Add the identity to be able to use the identity core.
+            // Also the DbContext needed to be assined to be able to
+            // use the tables in the database.
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<BookStoreContext>();
 
             // To add MVC to our application.
             // services.AddMvc();
@@ -132,6 +149,9 @@ namespace Tutorial
             // For one resource it is possible to define multiple routes.
             // It is not possible to define same route for multiple resources.
             app.UseRouting();
+
+            // To be able to enable authentication use this. 
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
