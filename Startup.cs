@@ -46,7 +46,10 @@ namespace Tutorial
             // Add the identity to be able to use the identity core.
             // Also the DbContext needed to be assined to be able to
             // use the tables in the database.
-            services.AddIdentity<IdentityUser, IdentityRole>()
+
+            // If some more columns are needed to be added to the table
+            // inherit from IdentityUser and add some new fields.
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<BookStoreContext>();
 
             // To add MVC to our application.

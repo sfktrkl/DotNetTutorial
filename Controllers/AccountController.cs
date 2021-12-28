@@ -44,6 +44,7 @@ namespace Tutorial.Controllers
                 }
 
                 ModelState.Clear();
+                return View();
             }
             return View(userModel);
         }
