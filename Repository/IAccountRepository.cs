@@ -7,5 +7,6 @@ namespace Tutorial.Repository
     public interface IAccountRepository
     {
         Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
+        Task<SignInResult> PasswordSignInAsync(SignInUserModel userModel);
     }
 }
