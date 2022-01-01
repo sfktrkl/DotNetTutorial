@@ -168,6 +168,8 @@ namespace Tutorial
 
             // To be able to enable authentication use this. 
             app.UseAuthentication();
+            // To be able to enable authorization to an action method use this.
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

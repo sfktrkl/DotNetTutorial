@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
@@ -120,6 +121,7 @@ namespace Tutorial.Controllers
             };
         }
 
+        [Authorize]
         public async Task<ViewResult> AddNewBook(bool isSuccess = false, int bookId = 0)
         {
             // Form is used to get data from user.
