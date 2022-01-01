@@ -32,5 +32,10 @@ namespace Tutorial.Repository
         {
             return await _signInManager.PasswordSignInAsync(userModel.Email, userModel.Password, userModel.RememberMe, false);
         }
+        
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 }

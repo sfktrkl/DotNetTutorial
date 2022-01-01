@@ -72,5 +72,13 @@ namespace Tutorial.Controllers
 
             return View();
         }
+
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountRepository.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
