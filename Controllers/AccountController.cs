@@ -71,7 +71,10 @@ namespace Tutorial.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("", "Invalid credentials");
+                if (result.IsNotAllowed)
+                    ModelState.AddModelError("", "Not allowed to login");
+                else
+                    ModelState.AddModelError("", "Invalid credentials");
             }
 
             return View();

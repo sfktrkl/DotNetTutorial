@@ -64,6 +64,7 @@ namespace Tutorial
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             // To be able to redirect a user without any login.
