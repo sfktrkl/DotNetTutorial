@@ -9,5 +9,6 @@ namespace Tutorial.Repository
         Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel);
         Task<SignInResult> PasswordSignInAsync(SignInUserModel userModel);
         Task SignOutAsync();
+        Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
     }
 }
