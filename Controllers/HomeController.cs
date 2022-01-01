@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
 using Tutorial.Repository;
+using Tutorial.Service;
 using Tutorial.Models;
 using System.Dynamic;
 
@@ -16,18 +17,21 @@ namespace Tutorial.Controllers
         private readonly NewBookAlertConfig _newBookAlertConfigurationSnapshot;
         private readonly IMessageRepository _messageRepository;
         private readonly NewBookAlertConfig _thirdParyBookConfiguration;
+        private readonly IUserService _userService;
 
         public HomeController(
             IConfiguration configuration,
             IOptions<NewBookAlertConfig> newBookAlertConfiguration,
             IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfigurationSnapshot,
-            IMessageRepository messageRepository)
+            IMessageRepository messageRepository,
+            IUserService userService)
         {
             _configuration = configuration;
             _newBookAlertConfiguration = newBookAlertConfiguration.Value;
             _newBookAlertConfigurationSnapshot = newBookAlertConfigurationSnapshot.Value;
             _messageRepository = messageRepository;
             _thirdParyBookConfiguration = newBookAlertConfigurationSnapshot.Get("ThirdPartyBook");
+            _userService = userService;
         }
 
         // This property will be created as ViewData.
@@ -123,6 +127,10 @@ namespace Tutorial.Controllers
 
             // Use named configuration to get the configuration.
             ViewBag.NewBookAlert6 = _thirdParyBookConfiguration;
+
+            // Get the user id from the context.
+            ViewBag.UserId = _userService.GetUserId();
+            ViewBag.IsAuthenticated = _userService.IsAuthenticated();
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
