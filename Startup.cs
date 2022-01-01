@@ -1,6 +1,7 @@
 using System.IO;
 using Tutorial.Data;
 using Tutorial.Models;
+using Tutorial.Helpers;
 using Tutorial.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
@@ -128,6 +129,7 @@ namespace Tutorial
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
             services.AddSingleton<IMessageRepository, MessageRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
 
             // Read the configuration and send it through the IOptions.
             services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));
