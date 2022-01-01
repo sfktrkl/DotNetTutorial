@@ -135,6 +135,7 @@ namespace Tutorial
 
             // Read the configuration and send it through the IOptions.
             services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));
+            services.Configure<SMTPConfigModel>(_configuration.GetSection("SMTPConfig"));
             // If there is another configuration which has the same properties
             // and same structure with any other configuration, using Configure
             // will override the configuration set before. Hence, named configurations
@@ -142,6 +143,7 @@ namespace Tutorial
             // cannot be used with IOptions, they should use IOptionsSnapshot or IOptionsMonitor.
             // If the service is a singleton, it is also not possible IOptionsSnapshot.
             services.Configure<NewBookAlertConfig>("ThirdPartyBook", _configuration.GetSection("ThirdPartyBook"));
+
 
             //                  | Use in singleton | Reloading | Named configurations
             // IOptions         |       True       |   False   |        False        
