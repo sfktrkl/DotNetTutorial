@@ -64,6 +64,12 @@ namespace Tutorial
                 options.Password.RequireUppercase = false;
             });
 
+            // To be able to redirect a user without any login.
+            services.ConfigureApplicationCookie(config =>
+            {
+                config.LoginPath = _configuration["Application:LoginPath"];
+            });
+
             // To add MVC to our application.
             // services.AddMvc();
 
