@@ -139,7 +139,11 @@ namespace Tutorial.Controllers
             // Create a test email
             var options = new UserEmailOptions
             {
-                ToEmails = new List<string>() { "test@gmail.com" }
+                ToEmails = new List<string>() { "test@gmail.com" },
+                PlaceHolders = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("{{Username}}", "Safak")
+                }
             };
             _emailService.SendTestEmail(options);
 

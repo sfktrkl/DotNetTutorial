@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using Tutorial.Models;
@@ -20,8 +21,8 @@ namespace Tutorial.Service
 
         public async Task SendTestEmail(UserEmailOptions userEmailOptions)
         {
-            userEmailOptions.Subject = "Test subject";
-            userEmailOptions.Body = GetEmailBody("TestEmail");
+            userEmailOptions.Subject = UpdatePlaceHolders("Test subject", userEmailOptions.PlaceHolders);
+            userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("TestEmail"), userEmailOptions.PlaceHolders);
             await SendEmail(userEmailOptions);
         }
 
@@ -54,6 +55,15 @@ namespace Tutorial.Service
         private string GetEmailBody(string templateName)
         {
             return File.ReadAllText(string.Format(templatePath, templateName));
+        }
+
+        private string UpdatePlaceHolders(string text, List<KeyValuePair<string, string>> placeHolders)
+        {
+            if (!string.IsNullOrEmpty(text) && placeHolders != null)
+                foreach (var placeholder in placeHolders)
+                    if (text.Contains(placeholder.Key))
+                        text = text.Replace(placeholder.Key, placeholder.Value);
+            return text;
         }
     }
 }
