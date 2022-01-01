@@ -57,13 +57,17 @@ namespace Tutorial.Controllers
 
         [Route("signin")]
         [HttpPost]
-        public async Task<IActionResult> Signin(SignInUserModel userModel)
+        public async Task<IActionResult> Signin(SignInUserModel userModel, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 var result = await _accountRepository.PasswordSignInAsync(userModel);
                 if (result.Succeeded)
                 {
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
 
