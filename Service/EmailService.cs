@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Tutorial.Service
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         private const string templatePath = @"EmailTemplate/{0}.html";
         private readonly SMTPConfigModel _smtpConfig;
@@ -16,6 +16,13 @@ namespace Tutorial.Service
         public EmailService(IOptions<SMTPConfigModel> smtpConfig)
         {
             _smtpConfig = smtpConfig.Value;
+        }
+
+        public async Task SendTestEmail(UserEmailOptions userEmailOptions)
+        {
+            userEmailOptions.Subject = "Test subject";
+            userEmailOptions.Body = GetEmailBody("TestEmail");
+            await SendEmail(userEmailOptions);
         }
 
         private async Task SendEmail(UserEmailOptions userEmailOptions)

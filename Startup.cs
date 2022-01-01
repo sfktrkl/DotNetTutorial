@@ -132,6 +132,7 @@ namespace Tutorial
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             // Read the configuration and send it through the IOptions.
             services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Tutorial.Repository;
 using Tutorial.Service;
@@ -18,13 +19,15 @@ namespace Tutorial.Controllers
         private readonly IMessageRepository _messageRepository;
         private readonly NewBookAlertConfig _thirdParyBookConfiguration;
         private readonly IUserService _userService;
+        private readonly IEmailService _emailService;
 
         public HomeController(
             IConfiguration configuration,
             IOptions<NewBookAlertConfig> newBookAlertConfiguration,
             IOptionsSnapshot<NewBookAlertConfig> newBookAlertConfigurationSnapshot,
             IMessageRepository messageRepository,
-            IUserService userService)
+            IUserService userService,
+            IEmailService emailService)
         {
             _configuration = configuration;
             _newBookAlertConfiguration = newBookAlertConfiguration.Value;
@@ -32,6 +35,7 @@ namespace Tutorial.Controllers
             _messageRepository = messageRepository;
             _thirdParyBookConfiguration = newBookAlertConfigurationSnapshot.Get("ThirdPartyBook");
             _userService = userService;
+            _emailService = emailService;
         }
 
         // This property will be created as ViewData.
@@ -131,6 +135,13 @@ namespace Tutorial.Controllers
             // Get the user id from the context.
             ViewBag.UserId = _userService.GetUserId();
             ViewBag.IsAuthenticated = _userService.IsAuthenticated();
+
+            // Create a test email
+            var options = new UserEmailOptions
+            {
+                ToEmails = new List<string>() { "test@gmail.com" }
+            };
+            _emailService.SendTestEmail(options);
 
             // If name of the view is same with the action method
             // just call the view, otherwise pass the view name.
