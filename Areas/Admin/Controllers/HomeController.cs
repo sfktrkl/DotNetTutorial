@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Tutorial.Areas.Admin.Controllers
 {
@@ -6,6 +7,10 @@ namespace Tutorial.Areas.Admin.Controllers
     [Area("admin")]
     // Enable the routing
     [Route("admin")]
+    // Authorize the action method according to the
+    // role. It is possible assigning this to a controller,
+    // action methods or globally in startup.
+    [Authorize(Roles = "Admin")]
     public class HomeController : Controller
     {
         // GET: HomeController

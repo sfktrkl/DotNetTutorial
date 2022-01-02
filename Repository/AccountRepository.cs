@@ -11,6 +11,7 @@ namespace Tutorial.Repository
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserService _userService;
         private readonly IEmailService _emailService;
         private readonly IConfiguration _configuration;
@@ -18,12 +19,14 @@ namespace Tutorial.Repository
         public AccountRepository(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             IUserService userService,
             IEmailService emailService,
             IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _userService = userService;
             _emailService = emailService;
             _configuration = configuration;
@@ -47,6 +50,10 @@ namespace Tutorial.Repository
             var result = await _userManager.CreateAsync(user, userModel.Password);
             if (result.Succeeded)
             {
+                // It is possible creating roles with the role manager,
+                // also with the user manager roles can be assigned.
+                // For now add everyone Admin role.
+                await _userManager.AddToRoleAsync(user, "Admin");
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 if (!string.IsNullOrEmpty(token))
                     await GenerateEmailConfirmationTokenAsync(user);
