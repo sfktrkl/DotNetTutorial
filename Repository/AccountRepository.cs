@@ -77,7 +77,7 @@ namespace Tutorial.Repository
 
         public async Task<SignInResult> PasswordSignInAsync(SignInUserModel userModel)
         {
-            return await _signInManager.PasswordSignInAsync(userModel.Email, userModel.Password, userModel.RememberMe, false);
+            return await _signInManager.PasswordSignInAsync(userModel.Email, userModel.Password, userModel.RememberMe, true);
         }
         
         public async Task SignOutAsync()

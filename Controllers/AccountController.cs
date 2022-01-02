@@ -74,6 +74,8 @@ namespace Tutorial.Controllers
 
                 if (result.IsNotAllowed)
                     ModelState.AddModelError("", "Not allowed to login");
+                else if (result.IsLockedOut)
+                    ModelState.AddModelError("", "Account blocked. Try after some time.");
                 else
                     ModelState.AddModelError("", "Invalid credentials");
             }

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Tutorial.Data;
 using Tutorial.Models;
@@ -66,6 +67,8 @@ namespace Tutorial
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.SignIn.RequireConfirmedEmail = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(20);
+                options.Lockout.MaxFailedAccessAttempts = 3;
             });
 
             // To be able to redirect a user without any login.
