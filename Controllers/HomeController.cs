@@ -1,8 +1,10 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Tutorial.Repository;
+using Tutorial.Filters;
 using Tutorial.Service;
 using Tutorial.Models;
 using System.Dynamic;
@@ -52,6 +54,7 @@ namespace Tutorial.Controllers
         // to be able to override them in action method use
         //[Route("~/")]
         // The index action method
+        [ServiceFilter(typeof(SampleActionFilter))]
         public ViewResult Index()
         {
             // ViewBag is used to pass data from action method
@@ -200,6 +203,12 @@ namespace Tutorial.Controllers
             // It is possible writing single line and multi line syntax.
 
             return View();
+        }
+
+        public override void OnActionExecuted(ActionExecutedContext context)
+        {
+            System.Diagnostics.Debug.WriteLine("HomeController - OnActionExecuted");
+            base.OnActionExecuted(context);
         }
 
     }

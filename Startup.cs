@@ -3,6 +3,7 @@ using System.IO;
 using Tutorial.Data;
 using Tutorial.Models;
 using Tutorial.Helpers;
+using Tutorial.Filters;
 using Tutorial.Service;
 using Tutorial.Repository;
 using Microsoft.AspNetCore.Http;
@@ -143,6 +144,7 @@ namespace Tutorial
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<SampleActionFilter>();
 
             // Read the configuration and send it through the IOptions.
             services.Configure<NewBookAlertConfig>(_configuration.GetSection("NewBookAlert"));
