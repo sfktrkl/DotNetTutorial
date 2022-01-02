@@ -71,6 +71,11 @@ namespace Tutorial
                 options.Lockout.MaxFailedAccessAttempts = 3;
             });
 
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromMinutes(5);
+            });
+
             // To be able to redirect a user without any login.
             services.ConfigureApplicationCookie(config =>
             {
