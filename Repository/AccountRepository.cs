@@ -66,6 +66,11 @@ namespace Tutorial.Repository
             return await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
         }
 
+        public async Task<IdentityResult> ConfirmEmailAsync(string uid, string token)
+        {
+            return await _userManager.ConfirmEmailAsync(await _userManager.FindByIdAsync(uid), token);
+        }
+
         private async Task SendEmailConfirmation(ApplicationUser user, string token)
         {
             string appDomain = _configuration.GetSection("Application:AppDomain").Value;
