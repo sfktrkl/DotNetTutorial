@@ -1,4 +1,4 @@
-﻿
+﻿@model EmailConfirmModel
 @{
     ViewData["Title"] = "Confirm Email";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row text-center">
-        @if (ViewBag.IsSuccess == true)
+        @if (Model.EmailVerified == true)
         {
             <div class="alert alert-success center" role="alert">
                 <p>Your email has been verified successfully.</p>
@@ -14,9 +14,28 @@
         }
         else
         {
-            <div class="alert alert-danger center" role="alert">
-                <p>Something went wrong or your token has been expired.</p>
-            </div>
+            if (Model.EmailSent)
+            {
+                <div class="alert alert-info center" role="alert">
+                    <p>Email sent on your registered email id.</p>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning center" role="alert">
+                    <p>We have sent an email on your email id. Click on the link to login.</p>
+                </div>
+            }
+
+            <form asp-action="ConfirmEmail">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Email" />
+
+                <p>Did not get any email of deleted by mistake?</p>
+                <div class="form-group">
+                    <input type="submit" value="Resend confirmation email" class="btn btn-primary" />
+                </div>
+            </form>
         }
     </div>
 </div>

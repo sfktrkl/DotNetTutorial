@@ -29,6 +29,11 @@ namespace Tutorial.Repository
             _configuration = configuration;
         }
 
+        public async Task<ApplicationUser> GetUserByEmailAsync(string email)
+        {
+            return await _userManager.FindByEmailAsync(email);
+        }
+
         public async Task<IdentityResult> CreateUserAsync(SignUpUserModel userModel)
         {
             var user = new ApplicationUser()
@@ -44,9 +49,16 @@ namespace Tutorial.Repository
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 if (!string.IsNullOrEmpty(token))
-                    await SendEmailConfirmation(user, token);
+                    await GenerateEmailConfirmationTokenAsync(user);
             }
             return result;
+        }
+
+        public async Task GenerateEmailConfirmationTokenAsync(ApplicationUser user)
+        {
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            if (!string.IsNullOrEmpty(token))
+                await SendEmailConfirmation(user, token);
         }
 
         public async Task<SignInResult> PasswordSignInAsync(SignInUserModel userModel)
