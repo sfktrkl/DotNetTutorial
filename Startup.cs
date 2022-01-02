@@ -225,6 +225,12 @@ namespace Tutorial
 
                 // To be able to use token replacement use
                 //endpoints.MapControllers();
+
+                // To be able to use areas, add this pattern
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
 
