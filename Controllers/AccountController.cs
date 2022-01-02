@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Tutorial.Repository;
 using Tutorial.Models;
@@ -151,12 +152,32 @@ namespace Tutorial.Controllers
                 model.EmailSent = true;
                 ModelState.Clear();
             }
-            else 
+            else
             {
                 ModelState.AddModelError("", "Something went wrong.");
             }
             return View(model);
         }
 
+        [AllowAnonymous, HttpGet("forgot-password")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [AllowAnonymous, HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _accountRepository.GetUserByEmailAsync(model.Email);
+                if (user != null)
+                    await _accountRepository.GenerateForgotPasswordTokenAsync(user);
+
+                ModelState.Clear();
+                model.EmailSent = true;
+            }
+            return View(model);
+        }
     }
 }

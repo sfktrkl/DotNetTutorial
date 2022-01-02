@@ -13,5 +13,6 @@ namespace Tutorial.Repository
         Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
         Task<IdentityResult> ConfirmEmailAsync(string uid, string token);
         Task GenerateEmailConfirmationTokenAsync(ApplicationUser user);
+        Task GenerateForgotPasswordTokenAsync(ApplicationUser user);
     }
 }

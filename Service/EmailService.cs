@@ -32,6 +32,12 @@ namespace Tutorial.Service
             userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("EmailConfirm"), userEmailOptions.PlaceHolders);
             await SendEmail(userEmailOptions);
         }
+        public async Task SendEmailForgotPassword(UserEmailOptions userEmailOptions)
+        {
+            userEmailOptions.Subject = UpdatePlaceHolders("Hello {{UserName}}, Reset your password.", userEmailOptions.PlaceHolders);
+            userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("ForgotPassword"), userEmailOptions.PlaceHolders);
+            await SendEmail(userEmailOptions);
+        }
 
         private async Task SendEmail(UserEmailOptions userEmailOptions)
         {
