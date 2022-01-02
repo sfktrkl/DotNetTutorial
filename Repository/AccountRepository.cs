@@ -89,6 +89,10 @@ namespace Tutorial.Repository
         {
             return await _userManager.ConfirmEmailAsync(await _userManager.FindByIdAsync(uid), token);
         }
+        public async Task<IdentityResult> ResetPasswordAsync(ResetPasswordModel model)
+        {
+            return await _userManager.ResetPasswordAsync(await _userManager.FindByIdAsync(model.UserId), model.Token, model.NewPassword);
+        }
 
         private async Task SendEmailConfirmation(ApplicationUser user, string token)
         {
