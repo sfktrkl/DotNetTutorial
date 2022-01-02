@@ -15,6 +15,18 @@
 
     <environment include="Development">
         <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+        @{ 
+            // To get those style sheets a new request
+            // has to be sended. Browsers can only handle
+            // a fixed number of request in a particular time.
+            // So, for all resources will be handled in a separate
+            // request and it will cause performance problems.
+            // With bundling those resources can be combined.
+            // With minification extra things in the files will
+            // be removed and size of the bundle will be reduced.
+        }
+        <link href="~/css/Site.css" rel="stylesheet" />
+        <link href="~/css/NewStyle.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
         <!--
@@ -33,8 +45,8 @@
               asp-fallback-test-value="absolute"
               integrity=""
               crossorigin="anonymous">
+        <link href="~/css/site.min.css" rel="stylesheet" />
     </environment>
-    <link href="~/css/Site.css" rel="stylesheet" />
 </head>
 <body>
     @{
