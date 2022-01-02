@@ -52,7 +52,8 @@ namespace Tutorial
             // If some more columns are needed to be added to the table
             // inherit from IdentityUser and add some new fields.
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<BookStoreContext>();
+                .AddEntityFrameworkStores<BookStoreContext>()
+                .AddDefaultTokenProviders();
 
             // To be able to configure the password complexity of the
             // identity core configure the IdentityOptions.

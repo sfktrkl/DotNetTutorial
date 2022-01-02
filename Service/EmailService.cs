@@ -26,6 +26,13 @@ namespace Tutorial.Service
             await SendEmail(userEmailOptions);
         }
 
+        public async Task SendEmailConfirmation(UserEmailOptions userEmailOptions)
+        {
+            userEmailOptions.Subject = UpdatePlaceHolders("Hello {{UserName}}, Confirm your email id.", userEmailOptions.PlaceHolders);
+            userEmailOptions.Body = UpdatePlaceHolders(GetEmailBody("EmailConfirm"), userEmailOptions.PlaceHolders);
+            await SendEmail(userEmailOptions);
+        }
+
         private async Task SendEmail(UserEmailOptions userEmailOptions)
         {
             var mail = new MailMessage
